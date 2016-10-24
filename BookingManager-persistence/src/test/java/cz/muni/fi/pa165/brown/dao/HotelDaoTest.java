@@ -78,6 +78,25 @@ public class HotelDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(hotels.contains(hotel2));
     }
 
+    @Test
+    public void update() {
+        createHotel("Test", "Test address", "123456");
+        Hotel hotel = hotelDao.findByAddress("Test address");
+        hotel.setName("Changed");
+        hotelDao.update(hotel);
+        Hotel hotel2 = hotelDao.findByAddress("Test address");
+        Assert.assertEquals(hotel2.getName(), "Changed");
+    }
+
+    @Test
+    public void delete() {
+        Hotel hotel = buildHotel("Test", "Test address 1", "123456789");
+        hotelDao.create(hotel);
+        Assert.assertEquals(hotelDao.findAll().size(), 1);
+        hotelDao.delete(hotel);
+        Assert.assertEquals(hotelDao.findAll().size(), 0);
+    }
+
     private void createHotel(String name, String address, String phone) {
         Hotel hotel = new Hotel();
         hotel.setName(name);
