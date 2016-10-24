@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public abstract class HotelDaoImpl implements HotelDao {
+public class HotelDaoImpl implements HotelDao {
 
     @PersistenceContext
     private EntityManager em;
