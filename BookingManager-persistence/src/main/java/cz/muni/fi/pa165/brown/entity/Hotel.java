@@ -34,46 +34,78 @@ public class Hotel implements Serializable {
     @Column(nullable = false)
     private String phone;
     
+    
     public Hotel()
     {
     }
     
+     /**
+     *
+     * @return id of hotel
+     */
     public Long getId()
     {
         return id;
     }
-            
+    
+     /**
+     *
+     * @param id id of hotel
+     */
     public void setId(Long id)
     {
         this.id = id;
     }
-            
+    
+    /**
+     *
+     * @return name of hotel
+     */
     public String getName()
     {
         return name;
     }
             
+    /**
+     *
+     * @param name name of hotel
+     */
     public void setName(String name)
     {
         this.name = name;
     }
             
+    /**
+     *
+     * @return address of hotel
+     */
     public String getAddress()
     {
         return address;
     }
     
-    
+    /**
+     *
+     * @param address address of hotel
+     */
     public void setAddress(String address)
     {
         this.address = address;
     }
             
+    /**
+     *
+     * @return phone no. of hotel
+     */
     public String getPhone()
     {
         return phone;
     }
             
+    /**
+     *
+     * @param phone phone no. of hotel
+     */
     public void setPhone(String phone)
     {
         this.phone = phone;
