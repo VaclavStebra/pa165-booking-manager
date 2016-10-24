@@ -23,14 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @TestExecutionListeners(inheritListeners = false, listeners = { DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class, TransactionalTestExecutionListener.class })
 @Transactional
 public class UserDaoTest extends AbstractTestNGSpringContextTests {
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
+    
+    
+  
