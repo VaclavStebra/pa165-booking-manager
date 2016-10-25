@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.brown.dao;
 
 import java.util.List;
 
+import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
 
 /**
@@ -39,10 +40,10 @@ public interface RoomDao {
 
     /**
      * Finds all rooms belonging to the specific hotel
-     * @param hotelId ID of the hotel
+     * @param hotel hotel
      * @return rooms with given hotel id
      */
-    List<Room> findByHotelId(Long hotelId);
+    List<Room> findByHotel(Hotel hotel);
 
     /**
      * Finds room by capacity
@@ -50,13 +51,6 @@ public interface RoomDao {
      * @return rooms with given capacity
      */
     List<Room> findByCapacity(Integer capacity);
-
-    /**
-     * Finds the rooms by occupation
-     * @param free true if free rooms are to be found, false if occupied
-     * @return list of free or occupied rooms
-     */
-    List<Room> findByOccupation(Boolean free);
 
     /**
      * Lists all rooms

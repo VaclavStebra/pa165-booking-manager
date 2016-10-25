@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -31,16 +32,10 @@ public class Room implements Serializable {
     @NotNull
     private BigDecimal pricePerNightPerPerson;
 
-    /** ID of the hotel in which the room is situated */
+    /** Hotel in which the room is situated */
     @NotNull
-    private Long hotelId;
-
-    /** ID of the client currently using the room */
-    private Long clientId;
-
-    /** Indicates whether the room is free */
-    @NotNull
-    private Boolean free;
+    @ManyToOne
+    private Hotel hotel;
 
     /**
      * Constructor
@@ -98,50 +93,52 @@ public class Room implements Serializable {
     }
 
     /**
-     * Getter for {@link #hotelId}
-     * @return id of the hotel in which the room is situated
+     * Getter for {@link #hotel}
+     * @return hotel in which the room is situated
      */
-    public Long getHotelId() {
-        return hotelId;
+    public Hotel getHotel() {
+        return hotel;
     }
 
     /**
-     * Setter for {@link #hotelId}
-     * @param hotelId id of the hotel in which the room is situated
+     * Setter for {@link #hotel}
+     * @param hotel hotel in which the room is situated
      */
-    public void setHotelId(Long hotelId) {
-        this.hotelId = hotelId;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
-    /**
-     * Getter for {@link #clientId}
-     * @return clients id
-     */
-    public Long getClientId() {
-        return clientId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Room)) {
+            return false;
+        }
+
+        Room room = (Room) o;
+
+        if (getId() != null ? !getId().equals(room.getId()) : room.getId() != null) {
+            return false;
+        }
+        if (getCapacity() != null ? !getCapacity().equals(room.getCapacity()) : room.getCapacity() != null) {
+            return false;
+        }
+        if (getPricePerNightPerPerson() != null ? !getPricePerNightPerPerson().equals(room.getPricePerNightPerPerson()) : room
+                .getPricePerNightPerPerson() != null) {
+            return false;
+        }
+        return getHotel() != null ? getHotel().equals(room.getHotel()) : room.getHotel() == null;
+
     }
 
-    /**
-     * Setter for {@link #clientId}
-     * @param clientId clients id
-     */
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
-
-    /**
-     * Getter for {@link #free}
-     * @return true if the room is free, false otherwise
-     */
-    public Boolean isFree() {
-        return free;
-    }
-
-    /**
-     * Setter for {@link #free}
-     * @param free true if room is free, false if the room is occupied
-     */
-    public void setFree(Boolean free) {
-        this.free = free;
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getCapacity() != null ? getCapacity().hashCode() : 0);
+        result = 31 * result + (getPricePerNightPerPerson() != null ? getPricePerNightPerPerson().hashCode() : 0);
+        result = 31 * result + (getHotel() != null ? getHotel().hashCode() : 0);
+        return result;
     }
 }
