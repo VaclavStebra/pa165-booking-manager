@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
 
 /**
@@ -44,18 +45,15 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public List<Room> findByHotelId(Long hotelId) {
-        return em.createQuery("select room from Room room where room.hotelId = :hotelId", Room.class).getResultList();
+    public List<Room> findByHotel(Hotel hotel) {
+        return em.createQuery("select room from Room room where room.hotel.id = :hotelId", Room.class)
+                .setParameter("hotelId", hotel.getId()).getResultList();
     }
 
     @Override
     public List<Room> findByCapacity(Integer capacity) {
-        return em.createQuery("select room from Room room where room.capacity = :capacity", Room.class).getResultList();
-    }
-
-    @Override
-    public List<Room> findByOccupation(Boolean free) {
-        return null;
+        return em.createQuery("select room from Room room where room.capacity = :capacity", Room.class)
+                .setParameter("capacity", capacity).getResultList();
     }
 
     @Override

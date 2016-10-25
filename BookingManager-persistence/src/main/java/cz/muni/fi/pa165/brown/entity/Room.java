@@ -31,16 +31,9 @@ public class Room implements Serializable {
     @NotNull
     private BigDecimal pricePerNightPerPerson;
 
-    /** ID of the hotel in which the room is situated */
+    /** Hotel in which the room is situated */
     @NotNull
-    private Long hotelId;
-
-    /** ID of the client currently using the room */
-    private Long clientId;
-
-    /** Indicates whether the room is free */
-    @NotNull
-    private Boolean free;
+    private Hotel hotel;
 
     /**
      * Constructor
@@ -98,50 +91,18 @@ public class Room implements Serializable {
     }
 
     /**
-     * Getter for {@link #hotelId}
-     * @return id of the hotel in which the room is situated
+     * Getter for {@link #hotel}
+     * @return hotel in which the room is situated
      */
-    public Long getHotelId() {
-        return hotelId;
+    public Hotel getHotel() {
+        return hotel;
     }
 
     /**
-     * Setter for {@link #hotelId}
-     * @param hotelId id of the hotel in which the room is situated
+     * Setter for {@link #hotel}
+     * @param hotel hotel in which the room is situated
      */
-    public void setHotelId(Long hotelId) {
-        this.hotelId = hotelId;
-    }
-
-    /**
-     * Getter for {@link #clientId}
-     * @return clients id
-     */
-    public Long getClientId() {
-        return clientId;
-    }
-
-    /**
-     * Setter for {@link #clientId}
-     * @param clientId clients id
-     */
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
-
-    /**
-     * Getter for {@link #free}
-     * @return true if the room is free, false otherwise
-     */
-    public Boolean isFree() {
-        return free;
-    }
-
-    /**
-     * Setter for {@link #free}
-     * @param free true if room is free, false if the room is occupied
-     */
-    public void setFree(Boolean free) {
-        this.free = free;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }
