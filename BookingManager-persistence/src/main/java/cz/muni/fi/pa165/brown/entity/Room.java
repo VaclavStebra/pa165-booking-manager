@@ -107,4 +107,38 @@ public class Room implements Serializable {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Room)) {
+            return false;
+        }
+
+        Room room = (Room) o;
+
+        if (getId() != null ? !getId().equals(room.getId()) : room.getId() != null) {
+            return false;
+        }
+        if (getCapacity() != null ? !getCapacity().equals(room.getCapacity()) : room.getCapacity() != null) {
+            return false;
+        }
+        if (getPricePerNightPerPerson() != null ? !getPricePerNightPerPerson().equals(room.getPricePerNightPerPerson()) : room
+                .getPricePerNightPerPerson() != null) {
+            return false;
+        }
+        return getHotel() != null ? getHotel().equals(room.getHotel()) : room.getHotel() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getCapacity() != null ? getCapacity().hashCode() : 0);
+        result = 31 * result + (getPricePerNightPerPerson() != null ? getPricePerNightPerPerson().hashCode() : 0);
+        result = 31 * result + (getHotel() != null ? getHotel().hashCode() : 0);
+        return result;
+    }
 }
