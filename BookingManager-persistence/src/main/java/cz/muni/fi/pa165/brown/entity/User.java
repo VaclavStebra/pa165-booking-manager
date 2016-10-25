@@ -18,21 +18,27 @@ public class User implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(nullable=false)
     private String name;
 
     @NotNull
+    @Column(nullable=false)
     private String surname;
 
     @NotNull
+    @Column(nullable=false)
     private String address;
 
     @NotNull
+    @Column(nullable=false, unique=true)
     private String email;
 
     @NotNull
+    @Column(nullable=false)
     private String password;
 
     @NotNull
+    @Column(nullable=false)
     private boolean admin;
 
     public User() {
