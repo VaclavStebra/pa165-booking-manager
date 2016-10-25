@@ -25,17 +25,19 @@ public class HotelDaoImpl implements HotelDao {
 
     @Override
     public Hotel findByAddress(String address) {
-        return em.createQuery("SELECT ht FROM Hotel ht WHERE ht.address = :address", Hotel.class)
-                .setParameter("address", address).getSingleResult();
+        List<Hotel> hts = em.createQuery("SELECT ht FROM Hotel ht WHERE ht.address = :address", Hotel.class)
+                .setParameter("address", address).getResultList();
+        if (hts.isEmpty()) {
+            return null;
+        }
+        return hts.get(0);
     }
 
-    
     @Override
     public List<Hotel> findAll() {
         return em.createQuery("select ht from Hotel ht", Hotel.class).getResultList();
     }
 
-    
     @Override
     public void create(Hotel ht) {
         em.persist(ht);
