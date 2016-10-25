@@ -86,11 +86,11 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         createReservation(user1, room1, sdf.parse("15.10.2016 18:00"), sdf.parse("21.10.2016 10:00"));
 
-        Reservation reservation = reservationDao.findById(1L);
+        Reservation reservation = reservationDao.findAll().get(0);
         reservation.setReservedTo(sdf.parse("28.11.2016 12:00"));
         reservationDao.update(reservation);
 
-        Reservation changedReservation = reservationDao.findById(1L);
+        Reservation changedReservation = reservationDao.findAll().get(0);
         Assert.assertEquals(changedReservation.getReservedTo(), sdf.parse("28.11.2016 12:00"));
     }
 
