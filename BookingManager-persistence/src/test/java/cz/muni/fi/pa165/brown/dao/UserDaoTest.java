@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.brown.dao;
 
 import cz.muni.fi.pa165.brown.PersistenceApplicationContext;
 import cz.muni.fi.pa165.brown.entity.User;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,6 +27,9 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     public UserDao userDao;
+    
+    @PersistenceContext
+    private EntityManager em;
 
     private User u1;
     private User u2;
@@ -50,7 +50,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         u2.setSurname("surname2");
         u3.setSurname("surname3");
 
-        u1.setEmail("email");
+        u1.setEmail("email1");
         u2.setEmail("email2");
         u3.setEmail("email3");
 
@@ -72,61 +72,71 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findAll() {
+    public void findAllTest() {
         List<User> found = userDao.findAll();
         Assert.assertEquals(found.size(), 3);
     }
-    
+
     @Test
-    public void findByEmail() {
-        User user = userDao.findByEmail("email1"); 
+    public void findByEmailTest() {
+        User user = userDao.findByEmail("email1");
         Assert.assertNotNull(user);
         Assert.assertEquals(user.getEmail(), "email1");
     }
-    
-        @Test(expectedExceptions = ConstraintViolationException.class)
-        public void TestNotNullNameConstraints
-        
-            () {
-        User user = new User();
-            user.setName(null);
-            userDao.create(user);
-        }
 
-        @Test(expectedExceptions = ConstraintViolationException.class)
-        public void TestNotNullSurnameConstraints
-        
-            () {
-        User user = new User();
-            user.setName(null);
-            userDao.create(user);
-        }
-
-        @Test(expectedExceptions = ConstraintViolationException.class)
-        public void TestNotNullAddressConstraints
-        
-            () {
-        User user = new User();
-            user.setAddress(null);
-            userDao.create(user);
-        }
-
-        @Test(expectedExceptions = ConstraintViolationException.class)
-        public void TestNotNullEmailConstraints
-        
-            () {
-        User user = new User();
-            user.setEmail(null);
-            userDao.create(user);
-        }
-
-        @Test(expectedExceptions = ConstraintViolationException.class)
-        public void TestNotNullPasswordConstraints
-        
-            () {
-        User user = new User();
-            user.setPassword(null);
-            userDao.create(user);
-        }
-
+    @Test
+    public void deleteTest() {
+        Assert.assertNotNull(userDao.findById(u1.getId()));
+        userDao.delete(u1);
+        Assert.assertNull(userDao.findById(u1.getId()));
     }
+
+   
+    
+    @Test
+    public void updateTest() {
+        u1.setName("resu1");
+        userDao.update(u1);
+        User changedU1 = em.find(User.class, u1.getId());
+        Assert.assertEquals(changedU1.getName(), "resu1");
+    }
+    
+       
+
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullNameConstraints() {
+        User user = new User();
+        user.setName(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullSurnameConstraints() {
+        User user = new User();
+        user.setName(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullAddressConstraints() {
+        User user = new User();
+        user.setAddress(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullEmailConstraints() {
+        User user = new User();
+        user.setEmail(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullPasswordConstraints() {
+        User user = new User();
+        user.setPassword(null);
+        userDao.create(user);
+    }
+
+}
