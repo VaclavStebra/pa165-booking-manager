@@ -5,25 +5,65 @@
  */
 package cz.muni.fi.pa165.brown.dao;
 
+import cz.muni.fi.pa165.brown.PersistenceApplicationContext;
+import cz.muni.fi.pa165.brown.entity.User;
+import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.Test;
 
 /**
  *
  * @author Michal Hagara
  */
-
-
-@ContextConfiguration(locations = "/SpringXMLConfig.xml")
-@TestExecutionListeners(inheritListeners = false, listeners = { DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class, TransactionalTestExecutionListener.class })
+@ContextConfiguration(classes = PersistenceApplicationContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class UserDaoTest extends AbstractTestNGSpringContextTests {
+
+    @Autowired
+    private UserDao userDao;
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullNameConstraints() {
+        User user = new User();
+        user.setName(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullSurnameConstraints() {
+        User user = new User();
+        user.setName(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullAddressConstraints() {
+        User user = new User();
+        user.setAddress(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullEmailConstraints() {
+        User user = new User();
+        user.setEmail(null);
+        userDao.create(user);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestNotNullPasswordConstraints() {
+        User user = new User();
+        user.setPassword(null);
+        userDao.create(user);
+    }
+
+
+
 }
-    
-    
-  
+
