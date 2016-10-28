@@ -3,8 +3,6 @@ package cz.muni.fi.pa165.brown.dao;
 import cz.muni.fi.pa165.brown.PersistenceApplicationContext;
 import cz.muni.fi.pa165.brown.entity.User;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,9 +25,6 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     public UserDao userDao;
-
-    @PersistenceContext
-    private EntityManager em;
 
     private User u1;
     private User u2;
@@ -101,7 +96,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test(expectedExceptions = ConstraintViolationException.class)
-    public void TestEmailUniqeness() {
+    public void TestEmailUniqueness() {
         User user = new User();
         user.setEmail("email1");
         userDao.create(user);
