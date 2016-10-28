@@ -11,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import java.util.List;
 
-import static org.testng.Assert.*;
 
 /**
  * @author VaclavStebra
@@ -98,10 +94,7 @@ public class HotelDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     private void createHotel(String name, String address, String phone) {
-        Hotel hotel = new Hotel();
-        hotel.setName(name);
-        hotel.setAddress(address);
-        hotel.setPhone(phone);
+        Hotel hotel = buildHotel(name, address, phone);
         hotelDao.create(hotel);
     }
 

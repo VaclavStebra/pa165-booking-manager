@@ -23,13 +23,16 @@ public class Hotel implements Serializable {
     private Long id;
     
     @NotNull
+    @Column(nullable=false)
     private String name;
     
     @NotNull
+    @Column(nullable=false)
     private String address;
     
     
     @NotNull
+    @Column(nullable=false)
     private String phone;
     
     

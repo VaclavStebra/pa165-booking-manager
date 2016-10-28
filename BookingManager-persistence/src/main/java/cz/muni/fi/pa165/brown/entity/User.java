@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.brown.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -10,28 +11,34 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name="Users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
+    @Column(nullable=false)
     private String name;
 
     @NotNull
+    @Column(nullable=false)
     private String surname;
 
     @NotNull
+    @Column(nullable=false)
     private String address;
 
     @NotNull
+    @Column(nullable=false, unique=true)
     private String email;
 
     @NotNull
+    @Column(nullable=false)
     private String password;
 
     @NotNull
+    @Column(nullable=false)
     private boolean admin;
 
     public User() {
