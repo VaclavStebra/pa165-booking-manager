@@ -27,7 +27,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     public UserDao userDao;
-    
+
     @PersistenceContext
     private EntityManager em;
 
@@ -91,18 +91,21 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertNull(userDao.findById(u1.getId()));
     }
 
-   
-    
     @Test
     public void updateTest() {
-        u1.setName("resu1");
-        userDao.update(u1);
-        User changedU1 = em.find(User.class, u1.getId());
-        Assert.assertEquals(changedU1.getName(), "resu1");
+        User user = userDao.findByEmail("email1");
+        user.setPassword("verysecurepass");
+        userDao.update(user);
+        User userChanged = userDao.findByEmail("email1");
+        Assert.assertEquals(userChanged.getPassword(), "verysecurepass");
     }
-    
-       
 
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void TestEmailUniqeness() {
+        User user = new User();
+        user.setEmail("email1");
+        userDao.create(user);
+    }
 
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void TestNotNullNameConstraints() {
