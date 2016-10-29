@@ -19,18 +19,22 @@ public class Reservation {
     private Long id;
 
     @NotNull
+    @Column(nullable=false)
     @ManyToOne
     private User user;
 
     @NotNull
+    @Column(nullable=false)
     @ManyToOne
     private Room room;
 
     @NotNull
+    @Column(nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date reservedFrom;
 
     @NotNull
+    @Column(nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date reservedTo;
 
