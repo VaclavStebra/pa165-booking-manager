@@ -146,6 +146,7 @@ public class Reservation {
 
     @Override
     public int hashCode() {
+        int result = getUser() != null ? getUser().hashCode() : 0;
         result = 31 * result + (getRoom() != null ? getRoom().hashCode() : 0);
         result = 31 * result + (getReservedFrom() != null ? getReservedFrom().hashCode() : 0);
         result = 31 * result + (getReservedTo() != null ? getReservedTo().hashCode() : 0);
