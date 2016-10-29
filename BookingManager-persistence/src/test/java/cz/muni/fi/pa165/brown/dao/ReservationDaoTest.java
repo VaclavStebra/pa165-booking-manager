@@ -80,7 +80,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "Hotel1Phone");
         createHotel(hotel1);
 
-        Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1);
+        Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1, "A123");
         createRoom(room1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -102,7 +102,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "Hotel1Phone");
         createHotel(hotel1);
 
-        Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1);
+        Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1, "A123");
         createRoom(room1);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -126,8 +126,8 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         createHotel(hotel1);
         createHotel(hotel2);
 
-        Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1);
-        Room room2 = createRoomInstance(2, new BigDecimal("2.0"), hotel2);
+        Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1, "A123");
+        Room room2 = createRoomInstance(2, new BigDecimal("2.0"), hotel2, "B123");
         createRoom(room1);
         createRoom(room2);
 
@@ -180,19 +180,20 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         return user;
     }
 
-    private void createRoom(Integer capacity, BigDecimal pricePerNightPerPerson, Hotel hotel) {
-        roomDao.create(createRoomInstance(capacity, pricePerNightPerPerson, hotel));
+    private void createRoom(Integer capacity, BigDecimal pricePerNightPerPerson, Hotel hotel, String roomIdentifier) {
+        roomDao.create(createRoomInstance(capacity, pricePerNightPerPerson, hotel, roomIdentifier));
     }
 
     private void createRoom(Room room) {
         roomDao.create(room);
     }
 
-    private Room createRoomInstance(Integer capacity, BigDecimal pricePerNightPerPerson, Hotel hotel) {
+    private Room createRoomInstance(Integer capacity, BigDecimal pricePerNightPerPerson, Hotel hotel, String roomIdentifier) {
         Room room = new Room();
         room.setCapacity(capacity);
         room.setPricePerNightPerPerson(pricePerNightPerPerson);
         room.setHotel(hotel);
+        room.setRoomIdentifier(roomIdentifier);
         return room;
     }
 
