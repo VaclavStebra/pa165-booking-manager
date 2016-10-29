@@ -27,10 +27,12 @@ public class Reservation {
     private Room room;
 
     @NotNull
-    private Date from;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date reservedFrom;
 
     @NotNull
-    private Date to;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date reservedTo;
 
     public Reservation() {
     }
@@ -84,35 +86,35 @@ public class Reservation {
     }
 
     /**
-     * Returns date from of the reservation
-     * @return date from of the reservation
+     * Returns date from which the reservation is valid
+     * @return date from which the reservation is valid
      */
-    public Date getFrom() {
-        return from;
+    public Date getReservedFrom() {
+        return reservedFrom;
     }
 
     /**
-     * Sets date from of the reservation
-     * @param from date from of the reservation
+     * Sets date from which the reservation is valid
+     * @param reservedFrom date from which the reservation is valid
      */
-    public void setFrom(Date from) {
-        this.from = from;
+    public void setReservedFrom(Date reservedFrom) {
+        this.reservedFrom = reservedFrom;
     }
 
     /**
-     * Returns date to of the reservation
-     * @return date to of the reservation
+     * Returns date to which the reservation is valid
+     * @return date to which the reservation is valid
      */
-    public Date getTo() {
-        return to;
+    public Date getReservedTo() {
+        return reservedTo;
     }
 
     /**
-     * Sets date to of the reservation
-     * @param to date to of the reservation
+     * Sets date to which the reservation is valid
+     * @param reservedTo date to which the reservation is valid
      */
-    public void setTo(Date to) {
-        this.to = to;
+    public void setReservedTo(Date reservedTo) {
+        this.reservedTo = reservedTo;
     }
 
     @Override
@@ -129,29 +131,24 @@ public class Reservation {
 
         Reservation that = (Reservation) o;
 
-        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) {
-            return false;
-        }
         if (getUser() != null ? !getUser().equals(that.getUser()) : that.getUser() != null) {
             return false;
         }
         if (getRoom() != null ? !getRoom().equals(that.getRoom()) : that.getRoom() != null) {
             return false;
         }
-        if (getFrom() != null ? !getFrom().equals(that.getFrom()) : that.getFrom() != null) {
+        if (getReservedFrom() != null ? !getReservedFrom().equals(that.getReservedFrom()) : that.getReservedFrom() != null) {
             return false;
         }
-        return getTo() != null ? getTo().equals(that.getTo()) : that.getTo() == null;
+        return getReservedTo() != null ? getReservedTo().equals(that.getReservedTo()) : that.getReservedTo() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getUser() != null ? getUser().hashCode() : 0);
         result = 31 * result + (getRoom() != null ? getRoom().hashCode() : 0);
-        result = 31 * result + (getFrom() != null ? getFrom().hashCode() : 0);
-        result = 31 * result + (getTo() != null ? getTo().hashCode() : 0);
+        result = 31 * result + (getReservedFrom() != null ? getReservedFrom().hashCode() : 0);
+        result = 31 * result + (getReservedTo() != null ? getReservedTo().hashCode() : 0);
         return result;
     }
 }
