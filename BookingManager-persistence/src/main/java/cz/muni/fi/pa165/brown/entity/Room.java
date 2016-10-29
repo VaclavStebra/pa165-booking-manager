@@ -145,17 +145,17 @@ public class Room implements Serializable {
 
         Room room = (Room) o;
 
-        if (!getHotel().equals(room.getHotel())) {
+        if (getHotel() != null ? !getHotel().equals(room.getHotel()) : room.getHotel() != null) {
             return false;
         }
-        return getRoomIdentifier().equals(room.getRoomIdentifier());
+        return getRoomIdentifier() != null ? getRoomIdentifier().equals(room.getRoomIdentifier()) : room.getRoomIdentifier() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getHotel().hashCode();
-        result = 31 * result + getRoomIdentifier().hashCode();
+        int result = getHotel() != null ? getHotel().hashCode() : 0;
+        result = 31 * result + (getRoomIdentifier() != null ? getRoomIdentifier().hashCode() : 0);
         return result;
     }
 }
