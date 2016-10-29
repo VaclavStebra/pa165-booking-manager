@@ -19,12 +19,12 @@ public class Reservation {
     private Long id;
 
     @NotNull
-    @Column(nullable=false)
+    @JoinColumn(nullable=false)
     @ManyToOne
     private User user;
 
     @NotNull
-    @Column(nullable=false)
+    @JoinColumn(nullable=false)
     @ManyToOne
     private Room room;
 
