@@ -3,10 +3,12 @@ package cz.muni.fi.pa165.brown.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -26,16 +28,24 @@ public class Room implements Serializable {
 
     /** Room capacity */
     @NotNull
+    @Column(nullable = false)
     private Integer capacity;
 
     /** Room price per night */
     @NotNull
+    @Column(nullable = false)
     private BigDecimal pricePerNightPerPerson;
 
     /** Hotel in which the room is situated */
     @NotNull
+    @JoinColumn(nullable = false)
     @ManyToOne
     private Hotel hotel;
+
+    /** Room identifier, such as simple room number or something more complicated like 'D-1-10' */
+    @NotNull
+    @Column(nullable = false)
+    private String roomIdentifier;
 
     /**
      * Constructor
@@ -108,6 +118,22 @@ public class Room implements Serializable {
         this.hotel = hotel;
     }
 
+    /**
+     * Getter for {@link #roomIdentifier}
+     * @return identifier of the room
+     */
+    public String getRoomIdentifier() {
+        return roomIdentifier;
+    }
+
+    /**
+     * Setter for {@link #roomIdentifier}
+     * @param roomIdentifier identifier of the room
+     */
+    public void setRoomIdentifier(String roomIdentifier) {
+        this.roomIdentifier = roomIdentifier;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -119,26 +145,17 @@ public class Room implements Serializable {
 
         Room room = (Room) o;
 
-        if (getId() != null ? !getId().equals(room.getId()) : room.getId() != null) {
+        if (!getHotel().equals(room.getHotel())) {
             return false;
         }
-        if (getCapacity() != null ? !getCapacity().equals(room.getCapacity()) : room.getCapacity() != null) {
-            return false;
-        }
-        if (getPricePerNightPerPerson() != null ? !getPricePerNightPerPerson().equals(room.getPricePerNightPerPerson()) : room
-                .getPricePerNightPerPerson() != null) {
-            return false;
-        }
-        return getHotel() != null ? getHotel().equals(room.getHotel()) : room.getHotel() == null;
+        return getRoomIdentifier().equals(room.getRoomIdentifier());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getCapacity() != null ? getCapacity().hashCode() : 0);
-        result = 31 * result + (getPricePerNightPerPerson() != null ? getPricePerNightPerPerson().hashCode() : 0);
-        result = 31 * result + (getHotel() != null ? getHotel().hashCode() : 0);
+        int result = getHotel().hashCode();
+        result = 31 * result + getRoomIdentifier().hashCode();
         return result;
     }
 }
