@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cz.muni.fi.pa165.brown.BeanMappingService;
 import cz.muni.fi.pa165.brown.dto.RoomDTO;
 import cz.muni.fi.pa165.brown.entity.Hotel;
+import cz.muni.fi.pa165.brown.service.RoomService;
 
 /**
  * Implementation of RoomFacade interface
