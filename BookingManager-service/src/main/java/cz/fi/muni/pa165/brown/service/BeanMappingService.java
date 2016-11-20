@@ -1,4 +1,4 @@
-package cz.fi.muni.pa165.brown;
+package cz.fi.muni.pa165.brown.service;
 
 import org.dozer.Mapper;
 
