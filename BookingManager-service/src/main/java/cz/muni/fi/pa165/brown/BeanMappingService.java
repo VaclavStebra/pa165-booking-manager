@@ -1,9 +1,10 @@
-package cz.fi.muni.pa165.brown;
+package cz.muni.fi.pa165.brown;
 
-import org.dozer.Mapper;
 
 import java.util.Collection;
 import java.util.List;
+
+import org.dozer.Mapper;
 
 /**
  * @author Vaclav Stebra
