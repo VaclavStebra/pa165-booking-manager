@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Import;
 
 import cz.muni.fi.pa165.brown.dto.RoomDTO;
 import cz.muni.fi.pa165.brown.entity.Room;
-import cz.muni.fi.pa165.brown.facade.RoomFacadeImpl;
-import cz.muni.fi.pa165.brown.service.impl.RoomServiceImpl;
 
 /**
  * Service configuration
@@ -20,7 +18,7 @@ import cz.muni.fi.pa165.brown.service.impl.RoomServiceImpl;
  */
 @Configuration
 @Import(PersistenceApplicationContext.class)
-@ComponentScan(basePackageClasses = {RoomServiceImpl.class, RoomFacadeImpl.class})
+@ComponentScan(basePackages = {"cz.muni.fi.pa165.brown"})
 public class ServiceConfig {
 
     @Bean
