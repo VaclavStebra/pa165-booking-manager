@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.fi.muni.pa165.brown.service;
+package cz.muni.fi.pa165.brown.service;
 
 import cz.muni.fi.pa165.brown.entity.Hotel;
 

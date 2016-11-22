@@ -8,7 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import cz.muni.fi.pa165.brown.dto.HotelDTO;
 import cz.muni.fi.pa165.brown.dto.RoomDTO;
+import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
 
 /**
@@ -35,6 +37,7 @@ public class ServiceConfig {
         @Override
         protected void configure() {
             mapping(Room.class, RoomDTO.class);
+            mapping(Hotel.class, HotelDTO.class);
         }
     }
 }

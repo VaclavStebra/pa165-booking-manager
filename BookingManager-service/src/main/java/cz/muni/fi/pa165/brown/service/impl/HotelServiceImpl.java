@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.fi.muni.pa165.brown.service;
+package cz.muni.fi.pa165.brown.service.impl;
 
 import cz.muni.fi.pa165.brown.dao.HotelDao;
 import cz.muni.fi.pa165.brown.entity.Hotel;
+import cz.muni.fi.pa165.brown.service.HotelService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ import java.util.List;
  * @author michal hagara
  */
 @Service
-public class HotelServiceImpl implements HotelService 
+public class HotelServiceImpl implements HotelService
 {
     @Autowired
     private HotelDao hotelDao;
