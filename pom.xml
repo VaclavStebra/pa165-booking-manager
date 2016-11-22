@@ -57,8 +57,8 @@
 
     <modules>
         <module>BookingManager-persistence</module>
-        <module>BookingManager-service</module>
         <module>BookingManager-api</module>
+        <module>BookingManager-service</module>
     </modules>
 
 </project>
