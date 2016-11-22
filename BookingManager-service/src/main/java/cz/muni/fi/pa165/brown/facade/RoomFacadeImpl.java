@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cz.muni.fi.pa165.brown.BeanMappingService;
+import cz.muni.fi.pa165.brown.dto.HotelDTO;
 import cz.muni.fi.pa165.brown.dto.RoomDTO;
 import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
@@ -36,6 +37,24 @@ public class RoomFacadeImpl implements RoomFacade {
     private BeanMappingService beanMappingService;
 
     @Override
+    public void create(RoomDTO room) {
+        try {
+            roomService.create(beanMappingService.mapTo(room, Room.class));
+        } catch (ServiceException e) {
+            logger.warn(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void delete(RoomDTO room) {
+        try {
+            roomService.delete(beanMappingService.mapTo(room, Room.class));
+        } catch (ServiceException e) {
+            logger.warn(e.getMessage(), e);
+        }
+    }
+
+    @Override
     public RoomDTO update(RoomDTO room) {
         Room roomObject = beanMappingService.mapTo(room, Room.class);
         try {
@@ -59,9 +78,11 @@ public class RoomFacadeImpl implements RoomFacade {
     }
 
     @Override
-    public List<RoomDTO> findByHotel(Hotel hotel) {
+    public List<RoomDTO> findByHotel(HotelDTO hotel) {
         try {
-            return beanMappingService.mapTo(roomService.findByHotel(hotel), RoomDTO.class);
+            return beanMappingService.mapTo(
+                    roomService.findByHotel(beanMappingService.mapTo(hotel, Hotel.class)),
+                    RoomDTO.class);
         } catch (ServiceException e) {
             logger.warn(e.getMessage(), e);
         }

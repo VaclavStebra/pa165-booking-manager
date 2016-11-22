@@ -26,6 +26,28 @@ public class RoomServiceImpl implements RoomService {
     private RoomDao roomDao;
 
     @Override
+    public void create(Room room) throws ServiceException {
+        try {
+            roomDao.create(room);
+        } catch (Throwable t) {
+            String message = "Could not create room: " + room;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
+    }
+
+    @Override
+    public void delete(Room room) throws ServiceException {
+        try {
+            roomDao.delete(room);
+        } catch (Throwable t) {
+            String message = "Could not delete room: " + room;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
+    }
+
+    @Override
     public Room update(Room room) throws ServiceException {
         try {
             return roomDao.update(room);
