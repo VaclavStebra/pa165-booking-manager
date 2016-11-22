@@ -12,14 +12,10 @@ public class HotelDTO
 
     private Long id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String address;
 
-
-    @NotNull
     private String phone;
 
 
