@@ -18,6 +18,11 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cz.muni.fi.pa165.brown</groupId>
+            <artifactId>BookingManager-persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 </project>

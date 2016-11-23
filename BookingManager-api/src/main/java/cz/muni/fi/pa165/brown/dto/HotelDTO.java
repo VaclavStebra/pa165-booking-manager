@@ -1,7 +1,5 @@
 package cz.muni.fi.pa165.brown.dto;
 
-import javax.validation.constraints.NotNull;
-
 /**
  *
  * @author Michal Hagara
@@ -86,8 +84,4 @@ public class HotelDTO
         return address.equals(other.address);
 
     }
-
-
-
-
 }

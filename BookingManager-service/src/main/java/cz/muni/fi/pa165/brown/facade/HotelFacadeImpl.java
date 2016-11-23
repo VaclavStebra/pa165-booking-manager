@@ -1,10 +1,10 @@
-package cz.fi.muni.pa165.brown.facade;
+package cz.muni.fi.pa165.brown.facade;
 
-import cz.fi.muni.pa165.brown.BeanMappingService;
-import cz.fi.muni.pa165.brown.service.HotelService;
+import cz.muni.fi.pa165.brown.BeanMappingService;
+import cz.muni.fi.pa165.brown.service.HotelService;
 import cz.muni.fi.pa165.brown.dto.HotelDTO;
 import cz.muni.fi.pa165.brown.entity.Hotel;
-import cz.muni.fi.pa165.brown.facade.HotelFacade;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
