@@ -2,11 +2,12 @@ package cz.muni.fi.pa165.brown.dao;
 
 import cz.muni.fi.pa165.brown.entity.Reservation;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author Peter Hutta
- * @version 1.0  25.10.2016
+ * @version 2.0  22.11.2016
  */
 public interface ReservationDao {
 
@@ -40,4 +41,12 @@ public interface ReservationDao {
      * @return List of all reservations
      */
     List<Reservation> findAll();
+
+    /**
+     * Returns reservations from the given period
+     * @param dateFrom initial date
+     * @param dateTo final date
+     * @return List of reservations from the given period
+     */
+    List<Reservation> findReservationsBetweenDates(Date dateFrom, Date dateTo);
 }
