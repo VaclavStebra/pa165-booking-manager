@@ -6,11 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author Peter Hutta
- * @version 1.0  25.10.2016
+ * @version 2.0  22.11.2016
  */
 @Repository
 @Transactional
@@ -42,5 +44,15 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public List<Reservation> findAll() {
         return em.createQuery("SELECT res FROM Reservation res", Reservation.class).getResultList();
+    }
+
+    @Override
+    public List<Reservation> findReservationsBetweenDates(Date dateFrom, Date dateTo) {
+        TypedQuery<Reservation> query = em.createQuery(
+                "SELECT res FROM Reservation res WHERE (res.reservedFrom BETWEEN :dateFrom AND :dateTo) OR " +
+                        "(res.reservedTo BETWEEN :dateFrom AND :dateTo)", Reservation.class);
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo", dateTo);
+        return query.getResultList();
     }
 }
