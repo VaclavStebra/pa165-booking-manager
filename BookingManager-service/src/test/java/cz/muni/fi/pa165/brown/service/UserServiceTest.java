@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.brown;
+package cz.muni.fi.pa165.brown.service;
 
+import cz.muni.fi.pa165.brown.ServiceConfig;
 import cz.muni.fi.pa165.brown.dao.UserDao;
 import cz.muni.fi.pa165.brown.entity.User;
 import cz.muni.fi.pa165.brown.service.UserService;
@@ -53,7 +54,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     public void findUserById() {
         User user = userService.findUserById(u1.getId());
         Assert.assertNotNull(user);
-        Assert.assertEquals(user.getEmail(), u1.getEmail());
+        Assert.assertEquals(user.getId(), u1.getId());
         Assert.assertNull(userService.findUserById(4l));
     }
 
@@ -61,7 +62,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     public void findUserByEmail() {
         User user = userService.findUserByEmail(u1.getEmail());
         Assert.assertNotNull(user);
-        Assert.assertEquals(user.getId(), u1.getId());
+        Assert.assertEquals(user.getEmail(), u1.getEmail());
         Assert.assertNull(userService.findUserByEmail("wrongz"));
     }
 
