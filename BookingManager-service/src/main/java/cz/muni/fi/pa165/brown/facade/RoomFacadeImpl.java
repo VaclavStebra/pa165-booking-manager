@@ -39,7 +39,9 @@ public class RoomFacadeImpl implements RoomFacade {
     @Override
     public void create(RoomDTO room) {
         try {
-            roomService.create(beanMappingService.mapTo(room, Room.class));
+            Room roomEntity = beanMappingService.mapTo(room, Room.class);
+            roomService.create(roomEntity);
+            room.setId(roomEntity.getId());
         } catch (ServiceException e) {
             logger.warn(e.getMessage(), e);
         }

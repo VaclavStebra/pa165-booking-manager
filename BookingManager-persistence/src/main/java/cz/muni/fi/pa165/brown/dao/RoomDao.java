@@ -15,14 +15,16 @@ public interface RoomDao {
     /**
      * Creates new room
      * @param room room entity
+     * @return created room
      */
-    void create(Room room);
+    Room create(Room room);
 
     /**
      * Delete room
      * @param room room entity
+     * @return deleted room
      */
-    void delete(Room room);
+    Room delete(Room room);
 
     /**
      * Update room

@@ -1,6 +1,7 @@
-package cz.muni.fi.pa165.brown;
+package cz.muni.fi.pa165.brown.facade;
 
 
+import cz.muni.fi.pa165.brown.ServiceConfig;
 import cz.muni.fi.pa165.brown.dto.UserDTO;
 import cz.muni.fi.pa165.brown.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,14 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
     public void findById() {
         UserDTO user = userFacade.findUserById(u1.getId());
         Assert.assertNotNull(user);
-        Assert.assertEquals(user.getEmail(), u1.getEmail());
+        Assert.assertEquals(user.getId(), u1.getId());
     }
 
     @Test
     public void findByEmail() {
         UserDTO user = userFacade.findUserByEmail("email1");
         Assert.assertNotNull(user);
-        Assert.assertEquals(user.getId(), u1.getId());
+        Assert.assertEquals(user.getEmail(), u1.getEmail());
     }
 
     @Test
