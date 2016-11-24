@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.brown.service.impl;
 
 import cz.muni.fi.pa165.brown.dao.HotelDao;
@@ -17,8 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 
- * 
+ *
+ *
  *
  * @author michal hagara
  */
@@ -28,17 +23,17 @@ public class HotelServiceImpl implements HotelService {
 
     @Autowired
     private HotelDao hotelDao;
-    
-    @Override        
+
+    @Override
     public void create(Hotel hotel) throws ServiceException {
-            try {
-                hotelDao.create(hotel);
-            } catch (Throwable t) {
-                String message = "Could not create hotel: " + hotel;
-                logger.error(message, t);
-                throw new ServiceException(message, t);
-            }
+        try {
+            hotelDao.create(hotel);
+        } catch (Throwable t) {
+            String message = "Could not create hotel: " + hotel;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
         }
+    }
 
 
 
@@ -69,13 +64,13 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Hotel findById(Long id) throws ServiceException {
-            try {
-                return hotelDao.findById(id);
-            } catch (Throwable t) {
-                String message = "Could not get hotel with id=" + id;
-                logger.error(message, t);
-                throw new ServiceException(message, t);
-            }
+        try {
+            return hotelDao.findById(id);
+        } catch (Throwable t) {
+            String message = "Could not get hotel with id=" + id;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
 
 
 

@@ -1,8 +1,7 @@
-package cz.fi.muni.fi.pa165.brown;
+package cz.muni.fi.pa165.brown.facade;
 
 import cz.muni.fi.pa165.brown.ServiceConfig;
 import cz.muni.fi.pa165.brown.dto.HotelDTO;
-import cz.muni.fi.pa165.brown.facade.HotelFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;

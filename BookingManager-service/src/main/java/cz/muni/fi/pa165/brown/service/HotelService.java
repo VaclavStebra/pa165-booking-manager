@@ -6,6 +6,8 @@
 package cz.muni.fi.pa165.brown.service;
 
 import cz.muni.fi.pa165.brown.entity.Hotel;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  *
  * @author Michal Hagara
  */
+@Service
 public interface HotelService {
 
     /**
@@ -21,41 +24,41 @@ public interface HotelService {
     * 
     * @param hotel
     * @return created Hotel
-    */ 
-    void create(Hotel hotel);
+    */
+    void create(Hotel hotel) throws DataAccessException;
 
     /**
      *
      * @param hotel hotel entity to delete
      */
-    public void delete(Hotel hotel);
+    public void delete(Hotel hotel) throws DataAccessException;;
 
     /**
      *
      * @param hotel user entity to update
      * @return hotel entity to update
      */
-    public Hotel update(Hotel hotel);
+    public Hotel update(Hotel hotel) throws DataAccessException;;
     
     /**
      *
      * @param id id of hotel to find
      * @return hotel entity with given id
      */
-    public Hotel findById(Long id);
+    public Hotel findById(Long id) throws DataAccessException;;
 
     /**
      *
      * @param address address of user to find
      * @return hotel entity with given address
      */
-    public Hotel findByAddress(String address);
+    public Hotel findByAddress(String address) throws DataAccessException;;
 
     /**
      *
      * @return list of all hotels
      */
-    public List<Hotel> findAll();
+    public List<Hotel> findAll() throws DataAccessException;;
 
     
 }

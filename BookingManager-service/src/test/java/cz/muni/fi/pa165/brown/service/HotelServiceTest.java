@@ -1,11 +1,10 @@
-package cz.fi.muni.fi.pa165.brown;
+package cz.muni.fi.pa165.brown.service;
 
 
 import cz.muni.fi.pa165.brown.BeanMappingService;
 import cz.muni.fi.pa165.brown.ServiceConfig;
 import cz.muni.fi.pa165.brown.dao.HotelDao;
 import cz.muni.fi.pa165.brown.entity.Hotel;
-import cz.muni.fi.pa165.brown.service.HotelService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
