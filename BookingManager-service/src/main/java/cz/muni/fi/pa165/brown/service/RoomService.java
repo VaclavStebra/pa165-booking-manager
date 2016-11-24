@@ -13,7 +13,6 @@ import cz.muni.fi.pa165.brown.entity.Room;
  *
  * @author Dominik Labuda
  */
-@Service
 public interface RoomService {
 
     /**
@@ -68,5 +67,4 @@ public interface RoomService {
      * @throws DataAccessException when execution fails
      */
     List<Room> findAll() throws DataAccessException;
-
 }

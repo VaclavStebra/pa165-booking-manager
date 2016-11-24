@@ -25,13 +25,15 @@ public class RoomDaoImpl implements RoomDao {
     private EntityManager em;
 
     @Override
-    public void create(Room room) {
+    public Room create(Room room) {
         em.persist(room);
+        return room;
     }
 
     @Override
-    public void delete(Room room) {
+    public Room delete(Room room) {
         em.remove(room);
+        return room;
     }
 
     @Override

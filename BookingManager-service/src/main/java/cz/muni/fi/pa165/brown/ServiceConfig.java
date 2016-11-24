@@ -20,7 +20,7 @@ import cz.muni.fi.pa165.brown.entity.Room;
  */
 @Configuration
 @Import(PersistenceApplicationContext.class)
-@ComponentScan(basePackages = {"cz.muni.fi.pa165.brown"})
+@ComponentScan(basePackages = "cz.muni.fi.pa165.brown")
 public class ServiceConfig {
 
     @Bean

@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan("cz.muni.fi.pa165.brown.dao")
+@ComponentScan("cz.muni.fi.pa165.brown")
 public class PersistenceApplicationContext {
 
     @Bean
