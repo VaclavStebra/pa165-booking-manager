@@ -1,10 +1,7 @@
 package cz.muni.fi.pa165.brown;
 
-import cz.muni.fi.pa165.brown.ServiceConfig;
-import cz.muni.fi.pa165.brown.PersistenceApplicationContext;
-import cz.muni.fi.pa165.brown.dao.UserDao;
+
 import cz.muni.fi.pa165.brown.dto.UserDTO;
-import cz.muni.fi.pa165.brown.entity.User;
 import cz.muni.fi.pa165.brown.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

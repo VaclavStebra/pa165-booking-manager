@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public boolean validatePassword(String password, String correctHash) {
+    private boolean validatePassword(String password, String correctHash) {
         if(password==null) return false;
         if(correctHash==null) throw new IllegalArgumentException("password hash is null");
         String[] params = correctHash.split(":");
