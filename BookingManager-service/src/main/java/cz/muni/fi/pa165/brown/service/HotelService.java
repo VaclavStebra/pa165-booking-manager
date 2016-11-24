@@ -22,7 +22,7 @@ public interface HotelService {
     * @param hotel
     * @return created Hotel
     */ 
-    Hotel create(Hotel hotel);
+    void create(Hotel hotel);
 
     /**
      *
