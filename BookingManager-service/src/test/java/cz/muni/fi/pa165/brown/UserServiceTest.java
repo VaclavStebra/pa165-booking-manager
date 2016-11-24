@@ -62,7 +62,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
         User user = userService.findUserByEmail(u1.getEmail());
         Assert.assertNotNull(user);
         Assert.assertEquals(user.getId(), u1.getId());
-        Assert.assertNull(userService.findUserByEmail("wrong"));
+        Assert.assertNull(userService.findUserByEmail("wrongz"));
     }
 
     @Test
