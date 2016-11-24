@@ -3,6 +3,9 @@ package cz.muni.fi.pa165.brown.service.impl;
 import cz.muni.fi.pa165.brown.dao.UserDao;
 import cz.muni.fi.pa165.brown.entity.User;
 import cz.muni.fi.pa165.brown.service.UserService;
+import cz.muni.fi.pa165.brown.service.exception.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,33 +21,65 @@ import java.util.Collection;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     private UserDao userDao;
 
     @Override
-    public User findUserById(Long id) {
-        return userDao.findById(id);
+    public User findUserById(Long id) throws ServiceException {
+        try {
+            return userDao.findById(id);
+        } catch (Throwable t) {
+            String message = "Could not get user with id=" + id;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return userDao.findByEmail(email);
+    public User findUserByEmail(String email) throws ServiceException {
+        try {
+            return userDao.findByEmail(email);
+        } catch (Throwable t) {
+            String message = "Could not get user with email=" + email;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
     }
 
     @Override
-    public boolean isAdmin(User u) {
-        return findUserById(u.getId()).isAdmin();
+    public boolean isAdmin(User u) throws ServiceException {
+        try {
+            return findUserById(u.getId()).isAdmin();
+        } catch (Throwable t) {
+            String message = "Could not determine if user is admin: " + u;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
     }
 
     @Override
-    public Collection<User> getAllUsers() {
-        return userDao.findAll();
+    public Collection<User> getAllUsers() throws ServiceException {
+        try {
+            return userDao.findAll();
+        } catch (Throwable t) {
+            String message = "Could not get all users";
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
     }
 
     @Override
-    public void createUser(User u) {
-        u.setPassword(createHash(u.getPassword()));
-        userDao.create(u);
+    public void createUser(User u) throws ServiceException {
+        try {
+            u.setPassword(createHash(u.getPassword()));
+            userDao.create(u);
+        }  catch (Throwable t) {
+            String message = "Could not create user: " + u;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
     }
 
     @Override
@@ -52,9 +87,9 @@ public class UserServiceImpl implements UserService {
         return validatePassword(password, u.getPassword());
     }
 
-    // Password hashing functions taken from example project
+    // Password hashing functions taken from example project - it's better for security not to reinvent the wheel
 
-    private static String createHash(String password) {
+    private String createHash(String password) {
         final int SALT_BYTE_SIZE = 24;
         final int HASH_BYTE_SIZE = 24;
         final int PBKDF2_ITERATIONS = 1000;
@@ -77,7 +112,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public static boolean validatePassword(String password, String correctHash) {
+    public boolean validatePassword(String password, String correctHash) {
         if(password==null) return false;
         if(correctHash==null) throw new IllegalArgumentException("password hash is null");
         String[] params = correctHash.split(":");
@@ -97,14 +132,14 @@ public class UserServiceImpl implements UserService {
      * @param b the second byte array
      * @return true if both byte arrays are the same, false if not
      */
-    private static boolean slowEquals(byte[] a, byte[] b) {
+    private boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
         for (int i = 0; i < a.length && i < b.length; i++)
             diff |= a[i] ^ b[i];
         return diff == 0;
     }
 
-    private static byte[] fromHex(String hex) {
+    private byte[] fromHex(String hex) {
         byte[] binary = new byte[hex.length() / 2];
         for (int i = 0; i < binary.length; i++) {
             binary[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
@@ -112,7 +147,7 @@ public class UserServiceImpl implements UserService {
         return binary;
     }
 
-    private static String toHex(byte[] array) {
+    private String toHex(byte[] array) {
         BigInteger bi = new BigInteger(1, array);
         String hex = bi.toString(16);
         int paddingLength = (array.length * 2) - hex.length();
