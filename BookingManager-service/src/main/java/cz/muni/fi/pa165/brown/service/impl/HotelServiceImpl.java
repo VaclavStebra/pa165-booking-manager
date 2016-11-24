@@ -8,7 +8,9 @@ package cz.muni.fi.pa165.brown.service.impl;
 import cz.muni.fi.pa165.brown.dao.HotelDao;
 import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.service.HotelService;
-
+import cz.muni.fi.pa165.brown.service.exception.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,54 +23,84 @@ import java.util.List;
  * @author michal hagara
  */
 @Service
-public class HotelServiceImpl implements HotelService
-{
+public class HotelServiceImpl implements HotelService {
+    private final static Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
+
     @Autowired
     private HotelDao hotelDao;
     
     @Override        
-    public Hotel create(Hotel hotel){
+    public void create(Hotel hotel) throws ServiceException {
+            try {
+                hotelDao.create(hotel);
+            } catch (Throwable t) {
+                String message = "Could not create hotel: " + hotel;
+                logger.error(message, t);
+                throw new ServiceException(message, t);
+            }
+        }
 
-        if(hotel == null) throw new IllegalArgumentException("param hotel is null");
 
-        hotelDao.create(hotel);
 
-        return hotel;
+
+    @Override
+    public void delete(Hotel hotel) throws ServiceException {
+        try {
+            hotelDao.delete(hotel);
+        } catch (Throwable t) {
+            String message = "Could not delete hotel: " + hotel;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
+    }
+
+    @Override
+    public Hotel update(Hotel hotel) throws ServiceException {
+        try {
+            hotelDao.update(hotel);
+            return hotel;
+        } catch (Throwable t) {
+            String message = "Could not update hotel: " + hotel;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
     }
 
 
     @Override
-    public void delete(Hotel hotel) {
-        if(hotel == null) throw new IllegalArgumentException("param hotel is null");
-        
-        hotelDao.update(hotel);
-        
+    public Hotel findById(Long id) throws ServiceException {
+            try {
+                return hotelDao.findById(id);
+            } catch (Throwable t) {
+                String message = "Could not get hotel with id=" + id;
+                logger.error(message, t);
+                throw new ServiceException(message, t);
+            }
+
+
+
     }
 
     @Override
-    public Hotel update(Hotel hotel) {
-        if(hotel == null) throw new IllegalArgumentException("param trip is null");
-        
-        hotelDao.update(hotel);
-        
-        return hotel;
+    public Hotel findByAddress(String address) throws ServiceException {
+        try {
+            return hotelDao.findByAddress(address);
+        } catch (Throwable t) {
+            String message = "Could not get hotel with given address" + address;
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
+
     }
 
     @Override
-    public Hotel findById(Long id) {
-        if (id == null || id < 0) return null;
-        
-        return hotelDao.findById(id);
+    public List<Hotel> findAll() throws ServiceException {
+        try {
+            return hotelDao.findAll();
+        } catch (Throwable t) {
+            String message = "Could not get all hotels";
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
     }
-
-    @Override
-    public Hotel findByAddress(String address) {
-        return hotelDao.findByAddress(address);
-    }
-
-    @Override
-    public List<Hotel> findAll() {
-        return hotelDao.findAll();
-    }
-    
 }
