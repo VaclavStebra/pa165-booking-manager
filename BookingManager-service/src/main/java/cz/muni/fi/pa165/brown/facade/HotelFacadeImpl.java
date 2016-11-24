@@ -1,14 +1,14 @@
 package cz.muni.fi.pa165.brown.facade;
 
 import cz.muni.fi.pa165.brown.BeanMappingService;
-import cz.muni.fi.pa165.brown.service.HotelService;
 import cz.muni.fi.pa165.brown.dto.HotelDTO;
 import cz.muni.fi.pa165.brown.entity.Hotel;
-
-import java.util.List;
+import cz.muni.fi.pa165.brown.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 /*
@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class HotelFacadeImpl implements HotelFacade{
+public class HotelFacadeImpl implements HotelFacade {
 
 
     @Autowired
@@ -33,10 +33,12 @@ public class HotelFacadeImpl implements HotelFacade{
     private BeanMappingService beanMappingService;
 
 
-    @Override
-    public void create(HotelDTO hotelDTO) {
-        hotelService.create(beanMappingService.mapTo(hotelDTO, Hotel.class));
+    @Override public void create(HotelDTO hotelDTO) {
+        Hotel hotel = beanMappingService.mapTo(hotelDTO, Hotel.class);
+        hotelService.create(hotel);
+        hotelDTO.setId(hotel.getId());
     }
+
 
 
     @Override
@@ -52,6 +54,9 @@ public class HotelFacadeImpl implements HotelFacade{
 
     @Override
     public HotelDTO findById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id is null");
+        }
         Hotel hotel = hotelService.findById(id);
         if (hotel == null) return null;
         return beanMappingService.mapTo(hotel, HotelDTO.class);
@@ -61,6 +66,7 @@ public class HotelFacadeImpl implements HotelFacade{
 
     @Override
     public HotelDTO findByAddress(String address) {
+
         Hotel hotel = hotelService.findByAddress(address);
         if (hotel == null) return null;
         return beanMappingService.mapTo(hotel, HotelDTO.class);
