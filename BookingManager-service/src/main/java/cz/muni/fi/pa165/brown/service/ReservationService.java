@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.brown.service;
 
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
+import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Reservation;
 import cz.muni.fi.pa165.brown.entity.Room;
 import org.springframework.dao.DataAccessException;
@@ -67,5 +67,5 @@ public interface ReservationService {
      */
     List<Reservation> findReservationsFromLastNDays(int n) throws DataAccessException;
 
-    List<Room> findAvailableRooms(HotelDTO hotel, Date dateFrom, Date dateTo) throws DataAccessException;
+    List<Room> findAvailableRooms(Hotel hotel, Date dateFrom, Date dateTo) throws DataAccessException;
 }

@@ -111,14 +111,19 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> findReservationsFromLastNDays(int n) throws ServiceException {
+        if (n < 0) {
+            String message = "Parameter n is negative";
+            logger.error(message);
+            throw new IllegalArgumentException(message);
+        }
         try {
             Calendar calendar = Calendar.getInstance();
 
             calendar.setTime(timeService.getCurrentTime());
             calendar.add(Calendar.DAY_OF_YEAR, -n);
-            Date lastWeek = calendar.getTime();
+            Date past = calendar.getTime();
 
-            return reservationDao.findReservationsBetweenDates(lastWeek, timeService.getCurrentTime());
+            return reservationDao.findReservationsBetweenDates(past, timeService.getCurrentTime());
         } catch (Throwable ex) {
             String message = "Couldn't get all the reservations from last " + n + " days";
             logger.error(message, ex);
@@ -127,9 +132,9 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Room> findAvailableRooms(HotelDTO hotel, Date dateFrom, Date dateTo) throws DataAccessException {
+    public List<Room> findAvailableRooms(Hotel hotel, Date dateFrom, Date dateTo) throws DataAccessException {
         try {
-            List<Room> hotelRooms = roomService.findByHotel(beanMappingService.mapTo(hotel, Hotel.class));
+            List<Room> hotelRooms = roomService.findByHotel(hotel);
             List<Reservation> reservations = findReservationsBetweenDates(dateFrom, dateTo);
             List<Room> availableRooms = new ArrayList<>();
             for (Room room : hotelRooms) {
