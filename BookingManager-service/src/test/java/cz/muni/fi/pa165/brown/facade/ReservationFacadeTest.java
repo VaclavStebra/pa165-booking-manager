@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
 
 /**
  * @author Peter Hutta
@@ -54,12 +53,6 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
     private ReservationDTO reservation1;
     private ReservationDTO reservation2;
     private SimpleDateFormat sdf;
-
-    @BeforeClass
-    public void setup()
-    {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @BeforeMethod
     public void createReservations() throws ParseException {
