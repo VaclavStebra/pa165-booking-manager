@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.brown.facade;
 import cz.muni.fi.pa165.brown.BeanMappingService;
 import cz.muni.fi.pa165.brown.dto.HotelDTO;
 import cz.muni.fi.pa165.brown.dto.RoomDTO;
+import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
 import cz.muni.fi.pa165.brown.service.ReservationService;
 import cz.muni.fi.pa165.brown.dto.ReservationDTO;
@@ -34,13 +35,14 @@ public class ReservationFacadeImpl implements ReservationFacade {
     private ReservationService reservationService;
 
     @Override
-    public Long create(ReservationDTO reservation) {
+    public void create(ReservationDTO reservation) {
         try {
-            return reservationService.create(beanMappingService.mapTo(reservation, Reservation.class));
+            Reservation res = beanMappingService.mapTo(reservation, Reservation.class);
+            reservationService.create(res);
+            reservation.setId(res.getId());
         } catch (DataAccessException ex) {
             logger.warn(ex.getMessage(), ex);
         }
-        return null;
     }
 
     @Override
@@ -108,7 +110,8 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public List<RoomDTO> findAvailableRooms(HotelDTO hotel, Date dateFrom, Date dateTo) {
-        List<Room> rooms = reservationService.findAvailableRooms(hotel, dateFrom, dateTo);
+        Hotel desiredHotel = beanMappingService.mapTo(hotel, Hotel.class);
+        List<Room> rooms = reservationService.findAvailableRooms(desiredHotel, dateFrom, dateTo);
         return beanMappingService.mapTo(rooms, RoomDTO.class);
     }
 }
