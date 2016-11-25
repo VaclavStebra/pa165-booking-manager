@@ -1,6 +1,11 @@
 package cz.muni.fi.pa165.brown.service.impl;
 
+import cz.muni.fi.pa165.brown.BeanMappingService;
+import cz.muni.fi.pa165.brown.dto.HotelDTO;
+import cz.muni.fi.pa165.brown.entity.Hotel;
+import cz.muni.fi.pa165.brown.entity.Room;
 import cz.muni.fi.pa165.brown.service.ReservationService;
+import cz.muni.fi.pa165.brown.service.RoomService;
 import cz.muni.fi.pa165.brown.service.TimeService;
 import cz.muni.fi.pa165.brown.dao.ReservationDao;
 import cz.muni.fi.pa165.brown.entity.Reservation;
@@ -8,8 +13,10 @@ import cz.muni.fi.pa165.brown.service.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +34,12 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     private TimeService timeService;
+
+    @Autowired
+    private RoomService roomService;
+
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Override
     public Long create(Reservation reservation) throws ServiceException {
@@ -110,6 +123,32 @@ public class ReservationServiceImpl implements ReservationService {
             String message = "Couldn't get all the reservations from last " + n + " days";
             logger.error(message, ex);
             throw new ServiceException(message, ex);
+        }
+    }
+
+    @Override
+    public List<Room> findAvailableRooms(HotelDTO hotel, Date dateFrom, Date dateTo) throws DataAccessException {
+        try {
+            List<Room> hotelRooms = roomService.findByHotel(beanMappingService.mapTo(hotel, Hotel.class));
+            List<Reservation> reservations = findReservationsBetweenDates(dateFrom, dateTo);
+            List<Room> availableRooms = new ArrayList<>();
+            for (Room room : hotelRooms) {
+                boolean reserved = false;
+                for (Reservation reservation : reservations) {
+                    if (reservation.getRoom().equals(room)) {
+                        reserved = true;
+                        break;
+                    }
+                }
+                if ( ! reserved) {
+                    availableRooms.add(room);
+                }
+            }
+            return availableRooms;
+        } catch (Throwable t) {
+            String message = "Couldn't get available rooms";
+            logger.error(message, t);
+            throw new ServiceException(message, t);
         }
     }
 }
