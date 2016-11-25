@@ -1,6 +1,9 @@
 package cz.muni.fi.pa165.brown.facade;
 
 import cz.muni.fi.pa165.brown.BeanMappingService;
+import cz.muni.fi.pa165.brown.dto.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.RoomDTO;
+import cz.muni.fi.pa165.brown.entity.Room;
 import cz.muni.fi.pa165.brown.service.ReservationService;
 import cz.muni.fi.pa165.brown.dto.ReservationDTO;
 import cz.muni.fi.pa165.brown.entity.Reservation;
@@ -101,5 +104,11 @@ public class ReservationFacadeImpl implements ReservationFacade {
             logger.warn(ex.getMessage(), ex);
         }
         return null;
+    }
+
+    @Override
+    public List<RoomDTO> findAvailableRooms(HotelDTO hotel, Date dateFrom, Date dateTo) {
+        List<Room> rooms = reservationService.findAvailableRooms(hotel, dateFrom, dateTo);
+        return beanMappingService.mapTo(rooms, RoomDTO.class);
     }
 }
