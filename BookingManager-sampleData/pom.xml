@@ -10,7 +10,7 @@
 
     <artifactId>BookingManager-sampleData</artifactId>
     <packaging>jar</packaging>
-    <name>API</name>
+    <name>SampleData</name>
 
     <dependencies>
         <!-- validation annotations for bean properties -->
