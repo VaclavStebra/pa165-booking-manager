@@ -15,6 +15,7 @@ public interface ReservationService {
 
     /**
      * Creates reservation
+     *
      * @param reservation reservation to create
      * @return id of created reservation
      * @throws DataAccessException when execution fails
@@ -23,6 +24,7 @@ public interface ReservationService {
 
     /**
      * Updates reservation
+     *
      * @param reservation reservation to update
      * @throws DataAccessException when execution fails
      */
@@ -30,6 +32,7 @@ public interface ReservationService {
 
     /**
      * Deletes reservation
+     *
      * @param reservation reservation to delete
      * @throws DataAccessException when execution fails
      */
@@ -37,6 +40,7 @@ public interface ReservationService {
 
     /**
      * Finds reservation with given id
+     *
      * @param id id of a reservation
      * @return found reservation, null otherwise
      * @throws DataAccessException when execution fails
@@ -45,6 +49,7 @@ public interface ReservationService {
 
     /**
      * Returns all reservations
+     *
      * @return list of reservations
      * @throws DataAccessException when execution fails
      */
@@ -52,8 +57,9 @@ public interface ReservationService {
 
     /**
      * Returns reservations from the given period
+     *
      * @param dateFrom initial date
-     * @param dateTo final date
+     * @param dateTo   final date
      * @return List of reservations from the given period
      * @throws DataAccessException when execution fails
      */
@@ -61,6 +67,7 @@ public interface ReservationService {
 
     /**
      * Returns reservations from last n days
+     *
      * @param n number of days
      * @return List of reservations from last n days
      * @throws DataAccessException when execution fails
