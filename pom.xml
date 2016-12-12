@@ -59,6 +59,7 @@
         <module>BookingManager-persistence</module>
         <module>BookingManager-api</module>
         <module>BookingManager-service</module>
+        <module>BookingManager-sampleData</module>
     </modules>
 
 </project>
