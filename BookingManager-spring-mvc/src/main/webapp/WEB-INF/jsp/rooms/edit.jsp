@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Edit room">
+<my:pagetemplate>
   <jsp:attribute name="body">
 
     <c:if test="${!sessionScope.user.admin}">
@@ -15,6 +15,10 @@
     <my:admin>
 
     <c:set var="endpoint" value="rooms" />
+
+      <h1>
+        <fmt:message key="room.title.edit" />
+      </h1>
 
     <form:form method="post" action="${pageContext.request.contextPath}/${endpoint}/edit/${roomEdit.id}" modelAttribute="roomEdit"
         cssClass="form-horizontal">
@@ -54,7 +58,7 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" type="submit">Edit</button>
+      <button class="btn btn-primary" type="submit"><fmt:message key="edit" /></button>
     </form:form>
 
     </my:admin>

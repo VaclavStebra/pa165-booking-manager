@@ -9,17 +9,30 @@
   <jsp:attribute name="body">
     <c:set var="endpoint" value="rooms" />
 
+    <script>
+      function openModal(suffix) {
+        var modal = $("#modal_" + suffix);
+        if (modal)
+          modal.modal('show');
+      }
+      function closeModal(suffix) {
+        var modal = $("#modal_" + suffix);
+        if (modal)
+          modal.modal('hide');
+      }
+    </script>
+
     <table class="table table-striped table-hover">
       <thead>
       <tr>
-        <th>Room identifier</th>
-        <th>Hotel</th>
-        <th>Capacity</th>
-        <th>Price</th>
+        <th><fmt:message key="room.roomIdentifier" /></th>
+        <th><fmt:message key="room.hotel" /></th>
+        <th><fmt:message key="room.capacity" /></th>
+        <th><fmt:message key="room.price" /></th>
 
         <my:admin>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th><fmt:message key="edit" /></th>
+          <th><fmt:message key="delete" /></th>
         </my:admin>
       </tr>
       </thead>
@@ -45,14 +58,25 @@
           <td>
             <button class="btn btn-primary"
                 onclick="location.href='${pageContext.request.contextPath}/${endpoint}/edit/${room.id}'">
-              Edit
+              <fmt:message key="edit" />
             </button>
           </td>
           <td>
-            <form method="post"
-                action="${pageContext.request.contextPath}/${endpoint}/delete/${room.id}">
-              <input type="submit" class="btn btn-primary" value="Delete" />
-            </form>
+            <button class="glyphicon glyphicon-trash btn" onclick=" openModal(${room.id}) ">
+            </button>
+
+            <my:modal suffix="${room.id}" title="Delete Room">
+              <jsp:attribute name="body">
+                <strong><fmt:message key="room.delete.sure" /> <c:out value="${room.roomIdentifier}" /></strong>
+              </jsp:attribute>
+              <jsp:attribute name="footer">
+                <form method="post"
+                    action="${pageContext.request.contextPath}/${endpoint}/delete/${room.id}">
+                  <input type="submit" class="btn btn-primary" value="Delete" />
+                </form>
+              </jsp:attribute>
+            </my:modal>
+
           </td>
           </my:admin>
         </tr>

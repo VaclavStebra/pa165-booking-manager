@@ -37,12 +37,12 @@
             <ul class="nav navbar-nav">
                 <c:if test="${not empty sessionScope.user}">
                     <c:if test="${sessionScope.user.admin}">
-                        <li><a href="${pageContext.request.contextPath}/users/">Users</a></li>
+                        <li><a href="${pageContext.request.contextPath}/users/"><f:message key="navigation.users" /></a></li>
                     </c:if>
 
-                    <li><a href="${pageContext.request.contextPath}/rooms/">Rooms</a></li>
-                    <li><a href="${pageContext.request.contextPath}/reservations/">Reservations</a></li>
-                    <li><a href="${pageContext.request.contextPath}/hotels/">Hotels</a></li>
+                    <li><a href="${pageContext.request.contextPath}/rooms/"><f:message key="navigation.rooms" /></a></li>
+                    <li><a href="${pageContext.request.contextPath}/reservations/"><f:message key="navigation.reservations" /></a></li>
+                    <li><a href="${pageContext.request.contextPath}/hotels/"><f:message key="navigation.hotels" /></a></li>
 
                 </c:if>
 
@@ -54,14 +54,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${sessionScope.user.name}"/><b
                         class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></li>
+                        <li><a href="${pageContext.request.contextPath}/auth/logout"><f:message key="user.logout" /></a></li>
                     </ul>
                     </c:if>
                 </li>
 
                 <c:if test="${empty sessionScope.user}">
-                    <li><a href="${pageContext.request.contextPath}/auth">Sign in</a></li>
-                    <li><a href="${pageContext.request.contextPath}/auth/register">Register</a></li>
+                    <li><a href="${pageContext.request.contextPath}/auth"><f:message key="user.signin"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/auth/register"><f:message key="user.register" /></a></li>
                 </c:if>
 
 

@@ -12,20 +12,20 @@
            modelAttribute="userLogin" cssClass="form-horizontal">
 
        <div class="form-group ${email_error?'has-error':''}">
-         <form:label path="email" cssClass="col-sm-2 control-label">Email</form:label>
+         <form:label path="email" cssClass="col-sm-2 control-label"><fmt:message key="email" /></form:label>
          <div class="col-sm-10">
            <form:input path="email" cssClass="form-control"/>
            <form:errors path="email" cssClass="help-block"/>
          </div>
        </div>
         <div class="form-group ${password_error?'has-error':''}">
-          <form:label path="password" cssClass="col-sm-2 control-label">Password</form:label>
+          <form:label path="password" cssClass="col-sm-2 control-label"><fmt:message key="password" /></form:label>
           <div class="col-sm-10">
             <form:password path="password" cssClass="form-control"/>
             <form:errors path="password" cssClass="help-block"/>
           </div>
         </div>
-      <button class="btn btn-primary" type="submit">Login</button>
+      <button class="btn btn-primary" type="submit"><fmt:message key="login" /></button>
     </form:form>
 
 
