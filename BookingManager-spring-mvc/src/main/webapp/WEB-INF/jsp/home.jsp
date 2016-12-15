@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %> <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="true" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
@@ -7,7 +8,7 @@
 <my:pagetemplate>
 <jsp:attribute name="body">
 
-    <h1>test</h1>
+    <h1>Welcome to BookingManager</h1>
 
 </jsp:attribute>
 </my:pagetemplate>

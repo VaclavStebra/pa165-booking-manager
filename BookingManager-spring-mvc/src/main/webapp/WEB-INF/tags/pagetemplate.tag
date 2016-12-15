@@ -5,6 +5,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
@@ -32,6 +33,42 @@
             </button>
             <a class="navbar-brand" href="${pageContext.request.contextPath}"><f:message key="navigation.project"/></a>
         </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <c:if test="${not empty sessionScope.user}">
+                    <c:if test="${sessionScope.user.admin}">
+                        <li><a href="${pageContext.request.contextPath}/users/">Users</a></li>
+                    </c:if>
+
+                    <li><a href="${pageContext.request.contextPath}/rooms/">Rooms</a></li>
+                    <li><a href="${pageContext.request.contextPath}/reservations/">Reservations</a></li>
+                    <li><a href="${pageContext.request.contextPath}/hotels/">Hotels</a></li>
+
+                </c:if>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <c:if test="${not empty sessionScope.user}">
+                <li class="dropdown" style="float: right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${sessionScope.user.name}"/><b
+                        class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></li>
+                    </ul>
+                    </c:if>
+                </li>
+
+                <c:if test="${empty sessionScope.user}">
+                    <li><a href="${pageContext.request.contextPath}/auth">Sign in</a></li>
+                    <li><a href="${pageContext.request.contextPath}/auth/register">Register</a></li>
+                </c:if>
+
+
+            </ul>
+
+        </div><!--/.nav-collapse -->
+
     </div>
 </nav>
 
@@ -46,16 +83,16 @@
 
     <!-- authenticated user info -->
     <c:if test="${not empty authenticatedUser}">
-    <div class="row">
-        <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>
-        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>
+        <div class="row">
+            <div class="col-xs-6 col-sm-8 col-md-9 col-lg-10"></div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <c:out value="${authenticatedUser.givenName} ${authenticatedUser.surname}"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </c:if>
 
     <!-- alerts -->
@@ -76,6 +113,8 @@
 
     <!-- page body -->
     <jsp:invoke fragment="body"/>
+
+    <hr>
 
     <!-- footer -->
     <footer class="footer">

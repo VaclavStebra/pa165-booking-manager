@@ -1,6 +1,9 @@
-package cz.muni.fi.pa165.brown.dto;
+package cz.muni.fi.pa165.brown.dto.reservation;
 
 import java.util.Date;
+
+import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 
 /**
  * @author Peter Hutta

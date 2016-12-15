@@ -1,10 +1,7 @@
 package cz.muni.fi.pa165.brown.facade;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -16,8 +13,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.muni.fi.pa165.brown.ServiceConfig;
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
-import cz.muni.fi.pa165.brown.dto.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 
 /**
  * Room facade tests
