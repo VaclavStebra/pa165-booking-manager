@@ -52,6 +52,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     User user1;
     User user2;
     User user3;
+    User user4;
 
 
     @Override
@@ -67,9 +68,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Date date4 = simpleDate.parse("2020-05-18");
         Date date5 = simpleDate.parse("2020-05-21");
 
-        user1 = user("Paolo", "Jennings", "paolo@jennings.com", "test");
-        user2 = user("Dan", "Carter", "dan@carter.com", "test");
-        user3 = user("Maa", "Nonu", "maa@nonu", "test");
+        user1 = user("Paolo", "Jennings", "paolo@jennings.com", "test", false);
+        user2 = user("Dan", "Carter", "dan@carter.com", "test", false);
+        user3 = user("Maa", "Nonu", "maa@nonu", "test", false);
+        user4 = user("Admin", "Admin", "a@a.a", "admin", true);
 
         room1 = room("1", new BigDecimal(40), 2, hotel1);
         room2 = room("2", new BigDecimal(100), 3, hotel1);
@@ -118,14 +120,14 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return reservation;
     }
 
-    private User user(String name, String surname, String email, String address) {
+    private User user(String name, String surname, String email, String address, boolean admin) {
         User user = new User();
         user.setName(name);
         user.setSurname(surname);
         user.setEmail(email);
-        user.setPassword("superandompassword");
+        user.setPassword("111");
         user.setAddress(address);
-        user.setAdmin(false);
+        user.setAdmin(admin);
         userService.createUser(user);
 
         return user;
