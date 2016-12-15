@@ -60,6 +60,7 @@
         <module>BookingManager-api</module>
         <module>BookingManager-service</module>
         <module>BookingManager-sampleData</module>
+        <module>BookingManager-rest</module>
     </modules>
 
 </project>
