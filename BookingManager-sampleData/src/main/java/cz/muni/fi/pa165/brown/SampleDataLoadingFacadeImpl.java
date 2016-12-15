@@ -57,8 +57,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Override
     public void loadData() throws IOException, ParseException {
 
-        hotel1 = hotel("Hotel Popelka");
-        hotel2 = hotel("Hotel Brilliant");
+        hotel1 = hotel("Hotel Popelka", "test", "123456789");
+        hotel2 = hotel("Hotel Brilliant", "test", "987654321");
 
         SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
         Date date1 = simpleDate.parse("2020-05-03");
@@ -67,15 +67,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Date date4 = simpleDate.parse("2020-05-18");
         Date date5 = simpleDate.parse("2020-05-21");
 
-        user1 = user("Paolo", "Jennings", "paolo@jennings.com");
-        user2 = user("Dan", "Carter", "dan@carter.com");
-        user3 = user("Maa", "Nonu", "maa@nonu");
+        user1 = user("Paolo", "Jennings", "paolo@jennings.com", "test");
+        user2 = user("Dan", "Carter", "dan@carter.com", "test");
+        user3 = user("Maa", "Nonu", "maa@nonu", "test");
 
-        room1 = room(1, new BigDecimal(40), 2, hotel1);
-        room2 = room(2, new BigDecimal(100), 3, hotel1);
-        room3 = room(3, new BigDecimal(150), 2, hotel1);
-        room4 = room(4, new BigDecimal(20), 4, hotel2);
-        room5 = room(5, new BigDecimal(70), 2, hotel2);
+        room1 = room("1", new BigDecimal(40), 2, hotel1);
+        room2 = room("2", new BigDecimal(100), 3, hotel1);
+        room3 = room("3", new BigDecimal(150), 2, hotel1);
+        room4 = room("4", new BigDecimal(20), 4, hotel2);
+        room5 = room("5", new BigDecimal(70), 2, hotel2);
 
 
 
@@ -86,19 +86,22 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     }
 
-    private Room room(int number, BigDecimal price, int capacity, Hotel hotel) {
+    private Room room(String number, BigDecimal price, int capacity, Hotel hotel) {
         Room room = new Room();
         room.setHotel(hotel);
         room.setCapacity(capacity);
         room.setPricePerNightPerPerson(price);
+        room.setRoomIdentifier(number);
         roomService.create(room);
 
         return room;
     }
 
-    private Hotel hotel(String name) {
+    private Hotel hotel(String name, String address, String phone) {
         Hotel hotel = new Hotel();
         hotel.setName(name);
+        hotel.setAddress(address);
+        hotel.setPhone(phone);
         hotelService.create(hotel);
 
         return hotel;
@@ -115,12 +118,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return reservation;
     }
 
-    private User user(String name, String surname, String email) {
+    private User user(String name, String surname, String email, String address) {
         User user = new User();
         user.setName(name);
         user.setSurname(surname);
         user.setEmail(email);
         user.setPassword("superandompassword");
+        user.setAddress(address);
         user.setAdmin(false);
         userService.createUser(user);
 
