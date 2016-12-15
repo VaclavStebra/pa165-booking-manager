@@ -7,7 +7,13 @@
 <my:pagetemplate>
 <jsp:attribute name="body">
 
-    <h1>test</h1>
+    <div class="jumbotron">
+        <h2><fmt:message key="navigation.project"/></h2>
+        <p><fmt:message key="home.welcome"/></p>
+        <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/hotel/list" role="button">
+            <fmt:message key="hotel.browse"/>
+        </a>
+    </div>
 
 </jsp:attribute>
 </my:pagetemplate>
