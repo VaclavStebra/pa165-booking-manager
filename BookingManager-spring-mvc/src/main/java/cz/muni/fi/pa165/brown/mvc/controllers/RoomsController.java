@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.brown.mvc.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
 import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 import cz.muni.fi.pa165.brown.facade.HotelFacade;
 import cz.muni.fi.pa165.brown.facade.RoomFacade;
 import cz.muni.fi.pa165.brown.mvc.binders.HotelBinder;
@@ -110,7 +112,11 @@ public class RoomsController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        UserDTO loggedUser = (UserDTO) request.getSession().getAttribute("user");
+        if(!loggedUser.isAdmin()){
+            return "redirect:" + uriBuilder.path("/").build().toUriString();
+        }
 
         RoomDTO room = roomFacade.findById(id);
         roomFacade.delete(room);

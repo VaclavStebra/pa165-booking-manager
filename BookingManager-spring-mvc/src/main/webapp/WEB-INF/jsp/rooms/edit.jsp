@@ -9,7 +9,7 @@
   <jsp:attribute name="body">
 
     <c:if test="${!sessionScope.user.admin}">
-      <h1>C'mon (wo)man! You have nothing to do here!</h1>
+      <h1><fmt:message key="access.cmon" /></h1>
     </c:if>
 
     <my:admin>

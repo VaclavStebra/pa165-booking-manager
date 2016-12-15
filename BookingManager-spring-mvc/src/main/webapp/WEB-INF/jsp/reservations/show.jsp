@@ -7,7 +7,7 @@
 
 <my:pagetemplate>
   <jsp:attribute name="body">
-    <c:set var="endpoint" value="rooms" />
+    <c:set var="endpoint" value="reservations" />
 
     <script>
       function openModal(suffix) {
@@ -22,31 +22,31 @@
       }
     </script>
 
-    <h1><fmt:message key="room" />&nbsp;${room.roomIdentifier}</h1>
+    <h1><fmt:message key="reservation" /></h1>
 
     <table class="table table-striped table-hover">
       <tr>
-        <th><fmt:message key="room.roomIdentifier" /></th>
+        <th><fmt:message key="reservation.from" /></th>
         <td>
-          <c:out value="${room.roomIdentifier}" />
+          <c:out value="${reservation.reservedFrom}" />
         </td>
       </tr>
       <tr>
-        <th><fmt:message key="room.hotel" /></th>
+        <th><fmt:message key="reservation.to" /></th>
         <td>
-          <c:out value="${room.hotel.name}" />
+          <c:out value="${reservation.reservedTo}" />
         </td>
       </tr>
       <tr>
-        <th><fmt:message key="room.capacity" /></th>
+        <th><fmt:message key="reservation.user" /></th>
         <td>
-          <c:out value="${room.capacity}" />
+          <c:out value="${reservation.user.name}" />&nbsp;<c:out value="${reservation.user.surname}" />
         </td>
       </tr>
       <tr>
-        <th><fmt:message key="room.price" /></th>
+        <th><fmt:message key="reservation.room" /></th>
         <td>
-          <c:out value="${room.pricePerNightPerPerson}" />
+          <c:out value="${reservation.room.roomIdentifier}" />
         </td>
       </tr>
 
@@ -55,21 +55,21 @@
     <my:admin>
 
             <button class="btn btn-primary"
-                onclick="location.href='${pageContext.request.contextPath}/${endpoint}/edit/${room.id}'">
+                onclick="location.href='${pageContext.request.contextPath}/${endpoint}/edit/${reservation.id}'">
               <fmt:message key="edit" />
             </button>
 
 
-            <button class="glyphicon glyphicon-trash btn" onclick=" openModal(${room.id}) ">
+            <button class="glyphicon glyphicon-trash btn" onclick=" openModal(${reservation.id}) ">
             </button>
 
-            <my:modal suffix="${room.id}" title="Delete Room">
+            <my:modal suffix="${reservation.id}" title="Delete Reservation">
               <jsp:attribute name="body">
-                <strong><fmt:message key="room.delete.sure" /> <c:out value="${room.roomIdentifier}" /></strong>
+                <strong><fmt:message key="reservation.delete.sure" /></strong>
               </jsp:attribute>
               <jsp:attribute name="footer">
                 <form method="post"
-                    action="${pageContext.request.contextPath}/${endpoint}/delete/${room.id}">
+                    action="${pageContext.request.contextPath}/${endpoint}/delete/${reservation.id}">
                   <input type="submit" class="btn btn-primary" value="Delete" />
                 </form>
               </jsp:attribute>

@@ -2,6 +2,8 @@ package cz.muni.fi.pa165.brown.dto.reservation;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 
@@ -12,12 +14,16 @@ public class ReservationDTO {
 
     private Long id;
 
+    @NotNull
     private Date reservedFrom;
 
+    @NotNull
     private Date reservedTo;
 
+    @NotNull
     private UserDTO user;
 
+    @NotNull
     private RoomDTO room;
 
     public Long getId() {

@@ -7,7 +7,7 @@
 
 <my:pagetemplate>
   <jsp:attribute name="body">
-    <c:set var="endpoint" value="rooms" />
+    <c:set var="endpoint" value="reservations" />
 
     <script>
       function openModal(suffix) {
@@ -22,15 +22,16 @@
       }
     </script>
 
-    <h1><fmt:message key="rooms" /></h1>
+    <h1><fmt:message key="reservations" /></h1>
 
     <table class="table table-striped table-hover">
       <thead>
       <tr>
-        <th><fmt:message key="room.roomIdentifier" /></th>
-        <th><fmt:message key="room.hotel" /></th>
-        <th><fmt:message key="room.capacity" /></th>
-        <th><fmt:message key="room.price" /></th>
+        <th></th>
+        <th><fmt:message key="reservation.from" /></th>
+        <th><fmt:message key="reservation.to" /></th>
+        <th><fmt:message key="reservation.user" /></th>
+        <th><fmt:message key="reservation.room" /></th>
 
         <my:admin>
           <th><fmt:message key="edit" /></th>
@@ -40,40 +41,43 @@
       </thead>
       <tbody>
 
-      <c:forEach items="${rooms}" var="room">
+      <c:forEach items="${reservations}" var="r" varStatus="loop">
         <tr>
           <td>
-            <a href="${pageContext.request.contextPath}/${endpoint}/get/${room.id}">
-              <c:out value="${room.roomIdentifier}" />
+            <a href="${pageContext.request.contextPath}/${endpoint}/get/${r.id}">
+              <c:out value="${loop.index+1}" />
             </a>
           </td>
           <td>
-            <c:out value="${room.hotel.name}" />
+            <fmt:formatDate value="${r.reservedFrom}" pattern="dd.MM.yyyy HH:mm" />
           </td>
           <td>
-            <c:out value="${room.capacity}" />
+            <fmt:formatDate value="${r.reservedTo}" pattern="dd.MM.yyyy HH:mm" />
           </td>
           <td>
-            <c:out value="${room.pricePerNightPerPerson}" />
+            <c:out value="${r.user.email}" />
+          </td>
+          <td>
+            <c:out value="${r.room.roomIdentifier}" />
           </td>
           <my:admin>
           <td>
             <button class="btn btn-primary"
-                onclick="location.href='${pageContext.request.contextPath}/${endpoint}/edit/${room.id}'">
+                onclick="location.href='${pageContext.request.contextPath}/${endpoint}/edit/${r.id}'">
               <fmt:message key="edit" />
             </button>
           </td>
           <td>
-            <button class="glyphicon glyphicon-trash btn" onclick=" openModal(${room.id}) ">
+            <button class="glyphicon glyphicon-trash btn" onclick=" openModal(${r.id}) ">
             </button>
 
-            <my:modal suffix="${room.id}" title="Delete Room">
+            <my:modal suffix="${r.id}" title="Delete Reservation">
               <jsp:attribute name="body">
-                <strong><fmt:message key="room.delete.sure" /> <c:out value="${room.roomIdentifier}" /></strong>
+                <strong><fmt:message key="reservation.delete.sure" /></strong>
               </jsp:attribute>
               <jsp:attribute name="footer">
                 <form method="post"
-                    action="${pageContext.request.contextPath}/${endpoint}/delete/${room.id}">
+                    action="${pageContext.request.contextPath}/${endpoint}/delete/${r.id}">
                   <input type="submit" class="btn btn-primary" value="Delete" />
                 </form>
               </jsp:attribute>
@@ -90,7 +94,7 @@
     <my:admin>
     <button class="btn btn-primary"
         onclick="location.href='${pageContext.request.contextPath}/${endpoint}/create'">
-      <fmt:message key="rooms.add" />
+      <fmt:message key="reservations.add" />
     </button>
     </my:admin>
 
