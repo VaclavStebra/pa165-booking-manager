@@ -22,48 +22,44 @@
       }
     </script>
 
-    <h1><fmt:message key="rooms" /></h1>
-
+    <h1><fmt:message key="room" />&nbsp;${room.roomIdentifier}</h1>
+    
     <table class="table table-striped table-hover">
-      <thead>
       <tr>
         <th><fmt:message key="room.roomIdentifier" /></th>
-        <th><fmt:message key="room.hotel" /></th>
-        <th><fmt:message key="room.capacity" /></th>
-        <th><fmt:message key="room.price" /></th>
-
-        <my:admin>
-          <th><fmt:message key="edit" /></th>
-          <th><fmt:message key="delete" /></th>
-        </my:admin>
+        <td>
+          <c:out value="${room.roomIdentifier}" />
+        </td>
       </tr>
-      </thead>
-      <tbody>
+      <tr>
+        <th><fmt:message key="room.hotel" /></th>
+        <td>
+          <c:out value="${room.hotel.name}" />
+        </td>
+      </tr>
+      <tr>
+        <th><fmt:message key="room.capacity" /></th>
+        <td>
+          <c:out value="${room.capacity}" />
+        </td>
+      </tr>
+      <tr>
+        <th><fmt:message key="room.price" /></th>
+        <td>
+          <c:out value="${room.pricePerNightPerPerson}" />
+        </td>
+      </tr>
 
-      <c:forEach items="${rooms}" var="room">
-        <tr>
-          <td>
-            <a href="${pageContext.request.contextPath}/${endpoint}/get/${room.id}">
-              <c:out value="${room.roomIdentifier}" />
-            </a>
-          </td>
-          <td>
-            <c:out value="${room.hotel.name}" />
-          </td>
-          <td>
-            <c:out value="${room.capacity}" />
-          </td>
-          <td>
-            <c:out value="${room.pricePerNightPerPerson}" />
-          </td>
-          <my:admin>
-          <td>
+    </table>
+
+    <my:admin>
+
             <button class="btn btn-primary"
                 onclick="location.href='${pageContext.request.contextPath}/${endpoint}/edit/${room.id}'">
               <fmt:message key="edit" />
             </button>
-          </td>
-          <td>
+
+
             <button class="glyphicon glyphicon-trash btn" onclick=" openModal(${room.id}) ">
             </button>
 
@@ -79,20 +75,7 @@
               </jsp:attribute>
             </my:modal>
 
-          </td>
           </my:admin>
-        </tr>
-        </c:forEach>
-
-      </tbody>
-    </table>
-
-    <my:admin>
-    <button class="btn btn-primary"
-        onclick="location.href='${pageContext.request.contextPath}/${endpoint}/create'">
-      Add Room
-    </button>
-    </my:admin>
 
   </jsp:attribute>
 

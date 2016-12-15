@@ -54,6 +54,12 @@ public class RoomsController {
         return "rooms/list";
     }
 
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable long id, Model model) {
+        model.addAttribute("room", roomFacade.findById(id));
+        return "rooms/show";
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createRoom(Model model) {
         log.debug("Create get was called");
