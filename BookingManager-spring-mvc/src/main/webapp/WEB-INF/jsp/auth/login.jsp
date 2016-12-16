@@ -27,7 +27,38 @@
         </div>
       <button class="btn btn-primary" type="submit"><fmt:message key="login" /></button>
     </form:form>
-
+        <h3><fmt:message key="home.availableusers"/></h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><fmt:message key="email"/></th>
+                    <th><fmt:message key="password"/></th>
+                    <th><fmt:message key="admin"/></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>paolo@jennings.com</td>
+                    <td>111</td>
+                    <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                </tr>
+                <tr>
+                    <td>dan@carter.com</td>
+                    <td>111</td>
+                    <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                </tr>
+                <tr>
+                    <td>maa@nonu</td>
+                    <td>111</td>
+                    <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                </tr>
+                <tr>
+                    <td>a@a.a</td>
+                    <td>111</td>
+                    <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                </tr>
+            </tbody>
+        </table>
 
     </jsp:attribute>
 </my:pagetemplate>

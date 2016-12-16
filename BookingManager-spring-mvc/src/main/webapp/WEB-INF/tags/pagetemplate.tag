@@ -38,17 +38,11 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <c:if test="${not empty sessionScope.user}">
-                    <c:if test="${sessionScope.user.admin}">
-                        <li><a href="${pageContext.request.contextPath}/users/"><f:message key="navigation.users" /></a></li>
-                    </c:if>
-
+                <c:if test="${sessionScope.user.admin}">
                     <li><a href="${pageContext.request.contextPath}/rooms/"><f:message key="navigation.rooms" /></a></li>
                     <li><a href="${pageContext.request.contextPath}/reservations/"><f:message key="navigation.reservations" /></a></li>
-                    <li><a href="${pageContext.request.contextPath}/hotels/"><f:message key="navigation.hotels" /></a></li>
-
                 </c:if>
-
+                <li><a href="${pageContext.request.contextPath}/hotels/"><f:message key="navigation.hotels" /></a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -64,7 +58,6 @@
 
                 <c:if test="${empty sessionScope.user}">
                     <li><a href="${pageContext.request.contextPath}/auth"><f:message key="user.signin"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/auth/register"><f:message key="user.register" /></a></li>
                 </c:if>
 
 

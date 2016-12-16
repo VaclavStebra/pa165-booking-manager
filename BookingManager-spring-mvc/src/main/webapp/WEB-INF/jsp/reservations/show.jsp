@@ -49,6 +49,12 @@
           <c:out value="${reservation.room.roomIdentifier}" />
         </td>
       </tr>
+      <tr>
+          <th><fmt:message key="reservation.hotel" /></th>
+          <td>
+            <c:out value="${reservation.room.hotel.name}" />
+          </td>
+        </tr>
 
     </table>
 

@@ -32,6 +32,7 @@
         <th><fmt:message key="reservation.to" /></th>
         <th><fmt:message key="reservation.user" /></th>
         <th><fmt:message key="reservation.room" /></th>
+        <th><fmt:message key="reservation.hotel" /></th>
 
         <my:admin>
           <th><fmt:message key="edit" /></th>
@@ -59,6 +60,9 @@
           </td>
           <td>
             <c:out value="${r.room.roomIdentifier}" />
+          </td>
+          <td>
+            <c:out value="${r.room.hotel.name}" />
           </td>
           <my:admin>
           <td>

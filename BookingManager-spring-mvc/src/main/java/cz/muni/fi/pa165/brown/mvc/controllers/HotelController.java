@@ -21,7 +21,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/hotel")
+@RequestMapping("/hotels")
 public class HotelController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class HotelController {
     @Autowired
     private RoomFacade roomFacade;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(Model model) {
         List<HotelDTO> hotels = hotelFacade.findAll();
         model.addAttribute("hotels", hotels);
