@@ -134,7 +134,7 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findReservationsBetweenDates() throws ParseException {
         Date from = sdf.parse("23.11.2016 11:00");
-        Date to = sdf.parse("29.11.2016 20:00");
+        Date to = sdf.parse("29.11.2016 16:00");
         List<ReservationDTO> list = reservationFacade.findReservationsBetweenDates(from, to);
 
         Assert.assertEquals(list.size(), 1);

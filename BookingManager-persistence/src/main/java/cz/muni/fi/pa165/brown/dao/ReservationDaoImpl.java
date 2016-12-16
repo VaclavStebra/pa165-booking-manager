@@ -49,8 +49,8 @@ public class ReservationDaoImpl implements ReservationDao {
     @Override
     public List<Reservation> findReservationsBetweenDates(Date dateFrom, Date dateTo) {
         TypedQuery<Reservation> query = em.createQuery(
-                "SELECT res FROM Reservation res WHERE (res.reservedFrom BETWEEN :dateFrom AND :dateTo) OR " +
-                        "(res.reservedTo BETWEEN :dateFrom AND :dateTo)", Reservation.class);
+                "SELECT res FROM Reservation res WHERE (:dateFrom BETWEEN res.reservedFrom AND res.reservedTo) OR " +
+                        "(:dateTo BETWEEN res.reservedFrom AND res.reservedTo)", Reservation.class);
         query.setParameter("dateFrom", dateFrom);
         query.setParameter("dateTo", dateTo);
         return query.getResultList();

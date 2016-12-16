@@ -24,6 +24,30 @@
 
     <h1><fmt:message key="reservations" /></h1>
 
+    <form:form method="get" action="${pageContext.request.contextPath}/${endpoint}/interval" modelAttribute="intervalNew" cssClass="form-horizontal">
+
+      <div class="form-group ${from_error?'has-error':''}">
+        <form:label path="from" cssClass="col-sm-2 control-label"><fmt:message key="reservation.from"/></form:label>
+        <div class="col-sm-10">
+          <form:input path="from" cssClass="form-control" />
+          &nbsp;Use dd.MM.yyyy HH:mm format
+          <form:errors path="from" cssClass="help-block" />
+        </div>
+      </div>
+
+      <div class="form-group ${to_error?'has-error':''}">
+        <form:label path="to" cssClass="col-sm-2 control-label"><fmt:message key="reservation.to"/></form:label>
+        <div class="col-sm-10">
+          <form:input path="to" cssClass="form-control" />
+          &nbsp;Use dd.MM.yyyy HH:mm format
+          <form:errors path="to" cssClass="help-block" />
+        </div>
+      </div>
+
+          <button class="btn btn-primary" type="submit"><fmt:message key="filter"/></button>
+          <a class="btn btn-default" href="${pageContext.request.contextPath}/${endpoint}"><fmt:message key="filter.clear"/></a>
+        </form:form>
+
     <table class="table table-striped table-hover">
       <thead>
       <tr>
