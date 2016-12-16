@@ -54,7 +54,7 @@
           </jsp:attribute>
           <jsp:attribute name="footer">
             <form method="post"
-                  action="${pageContext.request.contextPath}/hotel/delete/${hotel.id}">
+                  action="${pageContext.request.contextPath}/hotels/delete/${hotel.id}">
                 <input type="submit" class="btn btn-primary" value="Delete" />
             </form>
           </jsp:attribute>
