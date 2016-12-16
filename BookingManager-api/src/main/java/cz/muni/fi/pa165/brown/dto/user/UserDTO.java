@@ -1,4 +1,9 @@
-package cz.muni.fi.pa165.brown.dto;
+package cz.muni.fi.pa165.brown.dto.user;
+
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Vaclav Stebra

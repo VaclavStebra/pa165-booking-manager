@@ -1,12 +1,12 @@
 package cz.muni.fi.pa165.brown.facade;
 
 import cz.muni.fi.pa165.brown.BeanMappingService;
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
-import cz.muni.fi.pa165.brown.dto.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
 import cz.muni.fi.pa165.brown.service.ReservationService;
-import cz.muni.fi.pa165.brown.dto.ReservationDTO;
+import cz.muni.fi.pa165.brown.dto.reservation.ReservationDTO;
 import cz.muni.fi.pa165.brown.entity.Reservation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

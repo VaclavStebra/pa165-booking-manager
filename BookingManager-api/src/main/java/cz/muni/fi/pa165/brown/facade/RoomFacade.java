@@ -2,11 +2,11 @@ package cz.muni.fi.pa165.brown.facade;
 
 import java.util.List;
 
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
-import cz.muni.fi.pa165.brown.dto.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 
 /**
- * Room facade interface for {@link cz.muni.fi.pa165.brown.dto.RoomDTO}
+ * Room facade interface for {@link RoomDTO}
  *
  * @author Dominik Labuda
  */

@@ -2,8 +2,8 @@ package cz.muni.fi.pa165.brown.facade;
 
 
 import cz.muni.fi.pa165.brown.ServiceConfig;
-import cz.muni.fi.pa165.brown.dto.UserDTO;
-import cz.muni.fi.pa165.brown.facade.UserFacade;
+import cz.muni.fi.pa165.brown.dto.user.UserDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;

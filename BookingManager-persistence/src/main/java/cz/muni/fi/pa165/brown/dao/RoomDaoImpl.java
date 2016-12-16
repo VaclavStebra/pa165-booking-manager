@@ -32,7 +32,7 @@ public class RoomDaoImpl implements RoomDao {
 
     @Override
     public Room delete(Room room) {
-        em.remove(room);
+        em.remove(em.contains(room) ? room : em.merge(room));
         return room;
     }
 

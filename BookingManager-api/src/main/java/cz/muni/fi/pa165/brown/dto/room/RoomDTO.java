@@ -1,6 +1,14 @@
-package cz.muni.fi.pa165.brown.dto;
+package cz.muni.fi.pa165.brown.dto.room;
 
 import java.math.BigDecimal;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
+
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
 
 /**
  * DTO for Room entity
@@ -13,15 +21,23 @@ public class RoomDTO {
     private Long id;
 
     /** Room capacity */
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @NotNull
+    @Min(0)
     private Integer capacity;
 
     /** Room price per night */
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    @NotNull
+    @Min(0)
     private BigDecimal pricePerNightPerPerson;
 
     /** Hotel in which the room is situated */
+    @NotNull
     private HotelDTO hotel;
 
     /** Room identifier, such as simple room number or something more complicated like 'D-1-10' */
+    @NotEmpty
     private String roomIdentifier;
 
     /**

@@ -1,8 +1,9 @@
 package cz.muni.fi.pa165.brown.mvc.controllers;
 
 
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
-import cz.muni.fi.pa165.brown.dto.RoomDTO;
+
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 import cz.muni.fi.pa165.brown.facade.HotelFacade;
 import cz.muni.fi.pa165.brown.facade.RoomFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/hotel")
+@RequestMapping("/hotels")
 public class HotelController {
 
     @Autowired
@@ -29,7 +30,7 @@ public class HotelController {
     @Autowired
     private RoomFacade roomFacade;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(Model model) {
         List<HotelDTO> hotels = hotelFacade.findAll();
         model.addAttribute("hotels", hotels);

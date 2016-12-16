@@ -2,9 +2,9 @@ package cz.muni.fi.pa165.brown.facade;
 
 import cz.muni.fi.pa165.brown.BeanMappingService;
 import cz.muni.fi.pa165.brown.service.UserService;
-import cz.muni.fi.pa165.brown.dto.UserDTO;
+import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 import cz.muni.fi.pa165.brown.entity.User;
-import cz.muni.fi.pa165.brown.facade.UserFacade;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
