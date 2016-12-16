@@ -1,13 +1,16 @@
 package cz.muni.fi.pa165.brown.mvc.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import cz.muni.fi.pa165.brown.dto.reservation.ReservationIntervalDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +69,23 @@ public class ReservationsController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(Model model) {
         log.debug("List operation called");
+        ReservationIntervalDTO interval = new ReservationIntervalDTO();
+        interval.setFrom(new Date());
+        interval.setTo(new Date());
+        model.addAttribute("intervalNew", new ReservationIntervalDTO());
         model.addAttribute("reservations", reservationFacade.findAll());
+        return "reservations/list";
+    }
+
+    @RequestMapping(value="/interval", method = RequestMethod.GET)
+    public String listInterval (@Valid @ModelAttribute("intervalNew") ReservationIntervalDTO interval, BindingResult bindingResult, Model model,
+                                RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("alert_warning", "Wrong date format - please enter dates in dd.MM.yyyy HH:mm format");
+            return "redirect:" + uriBuilder.path("/reservations").build().toUriString();
+        }
+        model.addAttribute("interval", interval);
+        model.addAttribute("reservations", reservationFacade.findReservationsBetweenDates(interval.getFrom(), interval.getTo()));
         return "reservations/list";
     }
 
@@ -146,7 +165,10 @@ public class ReservationsController {
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(RoomDTO.class, this.roomBinder);
         binder.registerCustomEditor(UserDTO.class, this.userBinder);
-        binder.registerCustomEditor(Date.class, this.dateBinder);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyy HH:mm");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        //binder.registerCustomEditor(Date.class, this.dateBinder);
     }
 
 }
