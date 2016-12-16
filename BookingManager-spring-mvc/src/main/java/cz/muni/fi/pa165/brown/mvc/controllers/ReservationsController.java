@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import cz.muni.fi.pa165.brown.dto.reservation.ReservationCreateDTO;
 import cz.muni.fi.pa165.brown.dto.reservation.ReservationIntervalDTO;
+import cz.muni.fi.pa165.brown.mvc.validators.ReservationCreateValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -56,6 +54,9 @@ public class ReservationsController {
     /** Room facade */
     @Autowired
     private RoomFacade roomFacade;
+
+    @Autowired
+    private ReservationCreateValidator validator;
 
     @Autowired
     private RoomBinder roomBinder;
@@ -116,6 +117,40 @@ public class ReservationsController {
         redirectAttributes.addFlashAttribute("alert_success", "Creation of reservation for " + reservationNew.getUser().getEmail() + " succeeded");
 
         return "redirect:" + uriBuilder.path("/reservations").build().toUriString();
+    }
+
+    @RequestMapping(value = "/new/{roomId}", method = RequestMethod.GET)
+    public String createReservationByUser(@PathVariable Long roomId, Model model, HttpServletRequest request) {
+        log.debug("Create get was called");
+
+        ReservationCreateDTO reservation = new ReservationCreateDTO();
+        model.addAttribute("reservation", reservation);
+        model.addAttribute("roomId", roomId);
+        return "reservations/new";
+    }
+
+    @RequestMapping(value = "/new/{roomId}", method = RequestMethod.POST)
+    public String createByUser(@PathVariable Long roomId, @ModelAttribute("reservation") ReservationCreateDTO reservation,
+                               BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
+                               UriComponentsBuilder uriBuilder, HttpServletRequest request) {
+        reservation.setRoomId(roomId);
+        validator.validate(reservation, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("roomId", roomId);
+            return "reservations/new";
+        }
+
+        ReservationDTO newReservation = new ReservationDTO();
+        newReservation.setRoom(roomFacade.findById(roomId));
+        newReservation.setUser((UserDTO)request.getSession().getAttribute("user"));
+        newReservation.setReservedFrom(reservation.getReservedFrom());
+        newReservation.setReservedTo(reservation.getReservedTo());
+
+        reservationFacade.create(newReservation);
+        redirectAttributes.addFlashAttribute("alert_success", "Creation of reservation for " + newReservation.getUser().getEmail() + " succeeded");
+
+        return "redirect:" + uriBuilder.path("/reservations/get/" + newReservation.getId()).build().toUriString();
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
