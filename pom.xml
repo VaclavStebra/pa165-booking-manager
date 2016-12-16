@@ -61,6 +61,7 @@
         <module>BookingManager-service</module>
         <module>BookingManager-sampleData</module>
         <module>BookingManager-rest</module>
+        <module>BookingManager-spring-mvc</module>
     </modules>
 
 </project>

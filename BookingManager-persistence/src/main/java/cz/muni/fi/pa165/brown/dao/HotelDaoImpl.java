@@ -45,7 +45,7 @@ public class HotelDaoImpl implements HotelDao {
 
     @Override
     public void delete(Hotel ht) {
-        em.remove(ht);
+        em.remove(em.contains(ht) ? ht : em.merge(ht));
     }
 
     @Override

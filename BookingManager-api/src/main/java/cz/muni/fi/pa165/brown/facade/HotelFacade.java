@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.pa165.brown.facade;
 
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
 
 import java.util.List;
 

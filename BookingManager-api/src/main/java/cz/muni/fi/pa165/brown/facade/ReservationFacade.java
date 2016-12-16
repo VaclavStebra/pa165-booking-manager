@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.brown.facade;
 
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
-import cz.muni.fi.pa165.brown.dto.ReservationDTO;
-import cz.muni.fi.pa165.brown.dto.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.reservation.ReservationDTO;
+import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 
 import java.util.Date;
 import java.util.List;

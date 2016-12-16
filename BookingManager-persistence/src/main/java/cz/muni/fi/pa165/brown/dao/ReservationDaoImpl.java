@@ -33,7 +33,7 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public void delete(Reservation reservation) {
-        em.remove(reservation);
+        em.remove(em.contains(reservation) ? reservation : em.merge(reservation));
     }
 
     @Override

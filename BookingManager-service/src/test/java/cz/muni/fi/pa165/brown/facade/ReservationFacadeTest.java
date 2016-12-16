@@ -1,13 +1,11 @@
 package cz.muni.fi.pa165.brown.facade;
 
-import cz.muni.fi.pa165.brown.BeanMappingService;
 import cz.muni.fi.pa165.brown.ServiceConfig;
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
-import cz.muni.fi.pa165.brown.dto.ReservationDTO;
-import cz.muni.fi.pa165.brown.dto.RoomDTO;
-import cz.muni.fi.pa165.brown.dto.UserDTO;
-import cz.muni.fi.pa165.brown.entity.Reservation;
-import org.mockito.MockitoAnnotations;
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.reservation.ReservationDTO;
+import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.user.UserDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -15,14 +13,12 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

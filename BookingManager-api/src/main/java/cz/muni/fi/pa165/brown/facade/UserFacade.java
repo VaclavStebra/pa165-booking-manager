@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.brown.facade;
 
-import cz.muni.fi.pa165.brown.dto.UserDTO;
+import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

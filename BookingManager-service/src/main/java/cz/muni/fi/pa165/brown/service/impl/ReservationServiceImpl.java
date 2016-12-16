@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.brown.service.impl;
 
 import cz.muni.fi.pa165.brown.BeanMappingService;
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
 import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
 import cz.muni.fi.pa165.brown.service.ReservationService;
