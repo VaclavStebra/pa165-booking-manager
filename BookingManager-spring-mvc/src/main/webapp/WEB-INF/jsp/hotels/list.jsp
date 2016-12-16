@@ -44,7 +44,7 @@
                     <td><c:out value="${hotel.phone}"/></td>
                     <td><c:out value="${roomsForHotel[hotel.id].size()}"/></td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/hotel/show/${hotel.id}">
+                        <a href="${pageContext.request.contextPath}/hotels/show/${hotel.id}">
                             <fmt:message key="hotel.list.rooms"/>
                        </a>
                     </td>

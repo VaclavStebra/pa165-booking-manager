@@ -48,20 +48,31 @@ public class HotelController {
             roomsForHotel.put(hotel.getId(), roomFacade.findByHotel(hotel));
         }
         model.addAttribute("roomsForHotel", roomsForHotel);
-        return "hotel/list";
+        return "hotels/list";
+    }
+
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable long id, Model model) {
+        HotelDTO hotel = hotelFacade.findById(id);
+        List<RoomDTO> availableRooms = roomFacade.findByHotel(hotel);
+
+        model.addAttribute("hotel", hotel);
+        model.addAttribute("rooms", availableRooms);
+
+        return "hotels/show";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createHotel(Model model) {
         model.addAttribute("hotel", new HotelDTO());
-        return "hotel/create";
+        return "hotels/create";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("hotel") HotelDTO hotel, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         if (bindingResult.hasErrors()) {
-            return "hotel/create";
+            return "hotels/create";
         }
         hotelFacade.create(hotel);
         redirectAttributes.addFlashAttribute("alert_success", "Creation of " + hotel.getName() + " succeeded");
@@ -74,7 +85,7 @@ public class HotelController {
         HotelDTO hotel = hotelFacade.findById(id);
 
         model.addAttribute("hotelEdit", hotel);
-        return "hotel/edit";
+        return "hotels/edit";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
@@ -85,7 +96,7 @@ public class HotelController {
                        UriComponentsBuilder uriBuilder,
                        RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "hotel/edit";
+            return "hotels/edit";
         }
 
         hotel.setId(id);
