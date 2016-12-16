@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.brown.controllers;
 
-import cz.muni.fi.pa165.brown.dto.HotelDTO;
+import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
 import cz.muni.fi.pa165.brown.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.brown.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.brown.facade.HotelFacade;
