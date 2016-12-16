@@ -44,7 +44,7 @@
       <div class="form-group ${pricePerNightPerPerson_error?'has-error':''}">
         <form:label path="pricePerNightPerPerson" cssClass="col-sm-2 control-label"><fmt:message key="room.price"/></form:label>
         <div class="col-sm-10">
-          <form:input path="pricePerNightPerPerson" cssClass="form-control" />
+          <form:input path="pricePerNightPerPerson" cssClass="form-control" type="number" step="any"/>
           <form:errors path="pricePerNightPerPerson" cssClass="help-block" />
         </div>
       </div>
@@ -52,7 +52,7 @@
       <div class="form-group ${capacity_error?'has-error':''}">
         <form:label path="capacity" cssClass="col-sm-2 control-label"><fmt:message key="room.capacity"/></form:label>
         <div class="col-sm-10">
-          <form:input path="capacity" cssClass="form-control" />
+          <form:input path="capacity" cssClass="form-control" type="number" step="any" />
           <form:errors path="capacity" cssClass="help-block" />
         </div>
       </div>
