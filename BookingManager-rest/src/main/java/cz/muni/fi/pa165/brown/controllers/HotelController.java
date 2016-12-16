@@ -78,7 +78,7 @@ public class HotelController {
     /**
      * Create a new hotel by POST method curl -X POST -i -H "Content-Type:
      * application/json" --data
-     * '{"name":"Hotel","phone":789777654,"address":adressofhotel}'
+     * '{"name":"Hotel","phone":789777654,"address":"adressofhotel"}'
      * http://localhost:8080/pa165/rest/hotel/create
      *
      * @param hotelDTO hotelCreateDTO with required fields for creation
