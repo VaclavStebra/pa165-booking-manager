@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.brown.mvc.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -68,13 +70,22 @@ public class ReservationsController {
     private DateBinder dateBinder;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String list(Model model) {
+    public String list(Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes, HttpServletRequest request ) {
         log.debug("List operation called");
         ReservationIntervalDTO interval = new ReservationIntervalDTO();
         interval.setFrom(new Date());
         interval.setTo(new Date());
         model.addAttribute("intervalNew", new ReservationIntervalDTO());
-        model.addAttribute("reservations", reservationFacade.findAll());
+        UserDTO loggedUser = (UserDTO) request.getSession().getAttribute("user");
+        List<ReservationDTO> reservations;
+        if (loggedUser == null) {
+            reservations = new ArrayList<>();
+        } else if (loggedUser.isAdmin()){
+            reservations = reservationFacade.findAll();
+        } else {
+            reservations = reservationFacade.findForUser(loggedUser);
+        }
+        model.addAttribute("reservations", reservations);
         return "reservations/list";
     }
 
@@ -125,7 +136,7 @@ public class ReservationsController {
 
         ReservationCreateDTO reservation = new ReservationCreateDTO();
         model.addAttribute("reservation", reservation);
-        model.addAttribute("roomId", roomId);
+        model.addAttribute("room", roomFacade.findById(roomId));
         return "reservations/new";
     }
 
@@ -137,7 +148,7 @@ public class ReservationsController {
         validator.validate(reservation, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("roomId", roomId);
+            model.addAttribute("room", roomFacade.findById(roomId));
             return "reservations/new";
         }
 
@@ -154,14 +165,28 @@ public class ReservationsController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editRoom(@PathVariable long id, Model model) {
+    public String edit(@PathVariable long id, Model model, HttpServletRequest request) {
         ReservationDTO reservationDTO = reservationFacade.findById(id);
+        UserDTO loggedUser = (UserDTO)request.getSession().getAttribute("user");
+        if ( ! loggedUser.isAdmin()) {
+            ReservationIntervalDTO reservationEdit = new ReservationIntervalDTO();
 
-        model.addAttribute("reservationEdit", reservationDTO);
-        model.addAttribute("users", userFacade.getAllUsers());
-        model.addAttribute("rooms", roomFacade.findAll());
-        return "reservations/edit";
+            reservationEdit.setFrom(reservationDTO.getReservedFrom());
+            reservationEdit.setTo(reservationDTO.getReservedTo());
+
+            model.addAttribute("reservationEdit", reservationEdit);
+            model.addAttribute("method", "editUser");
+            model.addAttribute("reservationId", id);
+            return "reservations/edituser";
+        } else {
+            model.addAttribute("reservationEdit", reservationDTO);
+            model.addAttribute("users", userFacade.getAllUsers());
+            model.addAttribute("rooms", roomFacade.findAll());
+            model.addAttribute("method", "edit");
+            return "reservations/edit";
+        }
     }
+
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String edit(@Valid @ModelAttribute("reservationEdit") ReservationDTO reservationEdit,
@@ -183,10 +208,32 @@ public class ReservationsController {
         return "redirect:" + uriBuilder.path("/reservations").buildAndExpand(id).encode().toUriString();
     }
 
+    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.POST)
+    public String editUser(@Valid @ModelAttribute("reservationEdit") ReservationIntervalDTO reservationEdit,
+                           BindingResult bindingResult,
+                           @PathVariable long id,
+                           Model model,
+                           UriComponentsBuilder uriBuilder,
+                           RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("reservationId", id);
+            return "reservations/edituser";
+        }
+
+        ReservationDTO reservation = reservationFacade.findById(id);
+        reservation.setReservedFrom(reservationEdit.getFrom());
+        reservation.setReservedTo(reservationEdit.getTo());
+        reservationFacade.update(reservation);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Update of reservation for " + reservation.getUser().getEmail() + " was successful");
+        return "redirect:" + uriBuilder.path("/reservations").buildAndExpand(id).encode().toUriString();
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        ReservationDTO res = reservationFacade.findById(id);
         UserDTO loggedUser = (UserDTO) request.getSession().getAttribute("user");
-        if(!loggedUser.isAdmin()){
+        if(!loggedUser.isAdmin() && res.getUser().getId() != loggedUser.getId()){
             return "redirect:" + uriBuilder.path("/").build().toUriString();
         }
 

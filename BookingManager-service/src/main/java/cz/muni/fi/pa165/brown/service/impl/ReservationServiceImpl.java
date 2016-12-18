@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.brown.service.impl;
 import cz.muni.fi.pa165.brown.BeanMappingService;
 import cz.muni.fi.pa165.brown.entity.Hotel;
 import cz.muni.fi.pa165.brown.entity.Room;
+import cz.muni.fi.pa165.brown.entity.User;
 import cz.muni.fi.pa165.brown.service.ReservationService;
 import cz.muni.fi.pa165.brown.service.RoomService;
 import cz.muni.fi.pa165.brown.service.TimeService;
@@ -151,6 +152,24 @@ public class ReservationServiceImpl implements ReservationService {
             return availableRooms;
         } catch (Throwable t) {
             String message = "Couldn't get available rooms";
+            logger.error(message, t);
+            throw new ServiceException(message, t);
+        }
+    }
+
+    @Override
+    public List<Reservation> findForUser(User user) throws DataAccessException {
+        try {
+            List<Reservation> reservations = findAll();
+            List<Reservation> forUser = new ArrayList<>();
+            for (Reservation reservation : reservations) {
+                if (reservation.getUser().getId() == user.getId()) {
+                    forUser.add(reservation);
+                }
+            }
+            return forUser;
+        } catch (Throwable t) {
+            String message = "Couldn't find reservations for user";
             logger.error(message, t);
             throw new ServiceException(message, t);
         }

@@ -9,10 +9,10 @@
   <jsp:attribute name="body">
 
       <h1>
-          <fmt:message key="reservation.title.create" />
+          <fmt:message key="reservation.title.create" />&nbsp;<c:out value="${room.roomIdentifier}" /> @ <c:out value="${room.hotel.name}"/>
       </h1>
 
-    <form:form method="post" action="${pageContext.request.contextPath}/reservations/new/${roomId}" modelAttribute="reservation" cssClass="form-horizontal">
+    <form:form method="post" action="${pageContext.request.contextPath}/reservations/new/${room.id}" modelAttribute="reservation" cssClass="form-horizontal">
 
       <div class="form-group ${reservedFrom_error?'has-error':''}">
           <form:label path="reservedFrom" cssClass="col-sm-2 control-label"><fmt:message key="reservation.from"/></form:label>

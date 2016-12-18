@@ -58,10 +58,9 @@
         <th><fmt:message key="reservation.room" /></th>
         <th><fmt:message key="reservation.hotel" /></th>
 
-        <my:admin>
+
           <th><fmt:message key="edit" /></th>
           <th><fmt:message key="delete" /></th>
-        </my:admin>
       </tr>
       </thead>
       <tbody>
@@ -88,7 +87,6 @@
           <td>
             <c:out value="${r.room.hotel.name}" />
           </td>
-          <my:admin>
           <td>
             <button class="btn btn-primary"
                 onclick="location.href='${pageContext.request.contextPath}/${endpoint}/edit/${r.id}'">
@@ -112,7 +110,6 @@
             </my:modal>
 
           </td>
-          </my:admin>
         </tr>
         </c:forEach>
 

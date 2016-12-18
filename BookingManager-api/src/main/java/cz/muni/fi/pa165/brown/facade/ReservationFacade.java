@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.brown.facade;
 import cz.muni.fi.pa165.brown.dto.hotel.HotelDTO;
 import cz.muni.fi.pa165.brown.dto.reservation.ReservationDTO;
 import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
+import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -58,4 +59,6 @@ public interface ReservationFacade {
     List<ReservationDTO> findReservationsFromLastWeek();
 
     List<RoomDTO> findAvailableRooms(HotelDTO hotel, Date dateFrom, Date dateTo);
+
+    List<ReservationDTO> findForUser(UserDTO user);
 }
