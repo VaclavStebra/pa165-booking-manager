@@ -19,7 +19,7 @@
         <fmt:message key="reservation.title.edit" />
       </h1>
 
-    <form:form method="post" action="${pageContext.request.contextPath}/${endpoint}/edit/${reservationEdit.id}" modelAttribute="reservationEdit" cssClass="form-horizontal">
+    <form:form method="post" action="${pageContext.request.contextPath}/${endpoint}/${method}/${reservationEdit.id}" modelAttribute="reservationEdit" cssClass="form-horizontal">
 
       <div class="form-group ${reservedFrom_error?'has-error':''}">
         <form:label path="reservedFrom" cssClass="col-sm-2 control-label"><fmt:message key="reservation.from"/></form:label>

@@ -89,14 +89,16 @@
                 <td>
                     <c:out value="${room.pricePerNightPerPerson}" />
                 </td>
-              <c:if test="${!sessionScope.user.admin}">
-                  <td>
-                      <button class="btn btn-primary"
-                              onclick="location.href='${pageContext.request.contextPath}/reservations/new/${room.id}'">
-                          <fmt:message key="reserve" />
-                      </button>
-                  </td>
-              </c:if>
+                <my:loggedUser>
+                  <c:if test="${!sessionScope.user.admin}">
+                      <td>
+                          <button class="btn btn-primary"
+                                  onclick="location.href='${pageContext.request.contextPath}/reservations/new/${room.id}'">
+                              <fmt:message key="reserve" />
+                          </button>
+                      </td>
+                  </c:if>
+                </my:loggedUser>
             </tr>
         </c:forEach>
 
