@@ -95,4 +95,30 @@ public class HotelFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(hotelFacade.findAll().size(), 2);
     }
 
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullHotel() {
+        hotelFacade.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNullHotel() {
+        hotelFacade.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteNullHotel() {
+        hotelFacade.delete(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullId() {
+        hotelFacade.findById(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullAddress() {
+        hotelFacade.findByAddress(null);
+    }
+
 }

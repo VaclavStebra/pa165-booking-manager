@@ -117,6 +117,36 @@ public class RoomFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(roomFacade.findAll().size(), 3);
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullRoom() {
+        roomFacade.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNullRoom() {
+        roomFacade.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteNullRoom() {
+        roomFacade.delete(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullId() {
+        roomFacade.findById(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullHotel() {
+        roomFacade.findByHotel(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullCapacity() {
+        roomFacade.findByCapacity(null);
+    }
+
     // Helper methods
 
     private RoomDTO createRoomDto(Integer capacity, BigDecimal pricePerNightPerPerson, HotelDTO hotel, String roomIdentifier) {

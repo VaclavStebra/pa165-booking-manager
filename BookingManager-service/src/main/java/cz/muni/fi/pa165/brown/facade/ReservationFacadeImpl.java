@@ -38,6 +38,9 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public void create(ReservationDTO reservation) {
+        if (reservation == null) {
+            throw new IllegalArgumentException("reservation dto is null");
+        }
         try {
             Reservation res = beanMappingService.mapTo(reservation, Reservation.class);
             reservationService.create(res);
@@ -49,6 +52,9 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public void update(ReservationDTO reservation) {
+        if (reservation == null) {
+            throw new IllegalArgumentException("reservation dto is null");
+        }
         try {
             reservationService.update(beanMappingService.mapTo(reservation, Reservation.class));
         } catch (DataAccessException ex) {
@@ -58,6 +64,9 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public void delete(ReservationDTO reservation) {
+        if (reservation == null) {
+            throw new IllegalArgumentException("reservation dto is null");
+        }
         try {
             reservationService.delete(beanMappingService.mapTo(reservation, Reservation.class));
         } catch (DataAccessException ex) {
@@ -77,6 +86,9 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public ReservationDTO findById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id is null");
+        }
         try {
             Reservation reservation = reservationService.findById(id);
             return (reservation == null) ? null :
@@ -89,6 +101,12 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public List<ReservationDTO> findReservationsBetweenDates(Date dateFrom, Date dateTo) {
+        if (dateFrom == null) {
+            throw new IllegalArgumentException("dateFrom is null");
+        }
+        if (dateTo == null) {
+            throw new IllegalArgumentException("dateTo is null");
+        }
         try {
             return beanMappingService.mapTo(
                     reservationService.findReservationsBetweenDates(dateFrom, dateTo),
@@ -112,6 +130,15 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public List<RoomDTO> findAvailableRooms(HotelDTO hotel, Date dateFrom, Date dateTo) {
+        if (hotel == null) {
+            throw new IllegalArgumentException("hotel dto is null");
+        }
+        if (dateFrom == null) {
+            throw new IllegalArgumentException("dateFrom is null");
+        }
+        if (dateTo == null) {
+            throw new IllegalArgumentException("dateTo is null");
+        }
         Hotel desiredHotel = beanMappingService.mapTo(hotel, Hotel.class);
         List<Room> rooms = reservationService.findAvailableRooms(desiredHotel, dateFrom, dateTo);
         return beanMappingService.mapTo(rooms, RoomDTO.class);
@@ -119,6 +146,9 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public List<ReservationDTO> findForUser(UserDTO user) {
+        if (user == null) {
+            throw new IllegalArgumentException("user dto is null");
+        }
         try {
             User userEntity = beanMappingService.mapTo(user, User.class);
             return beanMappingService.mapTo(

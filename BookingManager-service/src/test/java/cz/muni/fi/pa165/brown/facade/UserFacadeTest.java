@@ -37,11 +37,21 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(user.getId(), u1.getId());
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullId() {
+        userFacade.findUserById(null);
+    }
+
     @Test
     public void findByEmail() {
         UserDTO user = userFacade.findUserByEmail("email1");
         Assert.assertNotNull(user);
         Assert.assertEquals(user.getEmail(), u1.getEmail());
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullEmail() {
+        userFacade.findUserByEmail(null);
     }
 
     @Test
@@ -65,6 +75,26 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
     public void login() {
         Assert.assertTrue(userFacade.login(userFacade.findUserByEmail("email1"), "pass1"));
         Assert.assertFalse(userFacade.login(userFacade.findUserByEmail("email2"), "pass1"));
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullUser() {
+        userFacade.createUser(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void isAdminNullUser() {
+        userFacade.isAdmin(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void loginNullUser() {
+        userFacade.login(null, "asd");
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void loginNullPassword() {
+        userFacade.login(u1, null);
     }
 
     @BeforeMethod

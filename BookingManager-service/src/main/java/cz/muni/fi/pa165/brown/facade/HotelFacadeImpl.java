@@ -34,6 +34,9 @@ public class HotelFacadeImpl implements HotelFacade {
 
 
     @Override public void create(HotelDTO hotelDTO) {
+        if (hotelDTO == null) {
+            throw new IllegalArgumentException("hotel dto is null");
+        }
         Hotel hotel = beanMappingService.mapTo(hotelDTO, Hotel.class);
         hotelService.create(hotel);
         hotelDTO.setId(hotel.getId());
@@ -44,11 +47,17 @@ public class HotelFacadeImpl implements HotelFacade {
     @Override
     public void delete(HotelDTO hotelDTO)
     {
+        if (hotelDTO == null) {
+            throw new IllegalArgumentException("hotel dto is null");
+        }
         hotelService.delete(beanMappingService.mapTo(hotelDTO, Hotel.class));
     }
 
     @Override
     public HotelDTO update(HotelDTO hotelDTO) {
+        if (hotelDTO == null) {
+            throw new IllegalArgumentException("hotel dto is null");
+        }
         return beanMappingService.mapTo(hotelService.update(beanMappingService.mapTo(hotelDTO, Hotel.class)), HotelDTO.class);
     }
 
@@ -67,6 +76,9 @@ public class HotelFacadeImpl implements HotelFacade {
     @Override
     public HotelDTO findByAddress(String address) {
 
+        if (address == null) {
+            throw new IllegalArgumentException("address is null");
+        }
         Hotel hotel = hotelService.findByAddress(address);
         if (hotel == null) return null;
         return beanMappingService.mapTo(hotel, HotelDTO.class);

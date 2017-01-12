@@ -73,6 +73,12 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public boolean login(UserDTO u, String password) {
+        if (u == null) {
+            throw new IllegalArgumentException("user dto is null");
+        }
+        if (password == null) {
+            throw new IllegalArgumentException("password is null");
+        }
         return userService.login(beanMappingService.mapTo(u, User.class), password);
     }
 }

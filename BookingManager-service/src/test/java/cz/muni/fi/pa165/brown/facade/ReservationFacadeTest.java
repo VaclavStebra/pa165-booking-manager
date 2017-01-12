@@ -181,4 +181,59 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(list.size(), 1);
         Assert.assertEquals(list.get(0), room2);
     }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNull() {
+        reservationFacade.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNull() {
+        reservationFacade.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteNull() {
+        reservationFacade.delete(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullId() {
+        reservationFacade.findById(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findReservationsBetweenDatesStartNull() {
+        reservationFacade.findReservationsBetweenDates(null, Date.from(ZonedDateTime.now().toInstant()));
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findReservationsBetweenDatesEndNull() {
+        reservationFacade.findReservationsBetweenDates(Date.from(ZonedDateTime.now().toInstant()), null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findForNullUser() {
+        reservationFacade.findForUser(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findAvailableRoomsForNullHotel() {
+        Date now = Date.from(ZonedDateTime.now().toInstant());
+        reservationFacade.findAvailableRooms(null, now, now);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findAvailableRoomsForNullStart() {
+        Date now = Date.from(ZonedDateTime.now().toInstant());
+        reservationFacade.findAvailableRooms(hotel, null, now);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findAvailableRoomsForNullEnd() {
+        Date now = Date.from(ZonedDateTime.now().toInstant());
+        reservationFacade.findAvailableRooms(hotel, now, null);
+    }
+
+
 }
