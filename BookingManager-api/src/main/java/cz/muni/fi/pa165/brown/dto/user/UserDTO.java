@@ -151,24 +151,24 @@ public class UserDTO {
             return false;
         }
         UserDTO user = (UserDTO) obj;
-        if (email == null) {
-            if (user.email != null) {
+        if (getEmail() == null) {
+            if (user.getEmail() != null) {
                 return false;
             }
         }
-        return email.equals(user.email);
+        return getEmail().equals(user.getEmail());
     }
 
     @Override
     public String toString() {
         return "UserDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", admin=" + admin +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", surname='" + getSurname() + '\'' +
+                ", address='" + getAddress() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", admin=" + getAddress() +
                 '}';
     }
 }
