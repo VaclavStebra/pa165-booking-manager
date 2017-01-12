@@ -63,8 +63,26 @@ public class HotelFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(hotel.getId(), hotel1.getId());
     }
 
+    @Test
+    public void updateHotel() {
+        HotelDTO hotel = hotelFacade.findById(hotel1.getId());
+        hotel.setName("Changed");
+        hotelFacade.update(hotel);
+        HotelDTO changedHotel = hotelFacade.findById(hotel1.getId());
+        Assert.assertEquals(changedHotel.getName(), "Changed");
+    }
 
-
+    @Test
+    public void deleteHotel() {
+        HotelDTO hotel = new HotelDTO();
+        hotel.setAddress("Test");
+        hotel.setName("Test");
+        hotel.setPhone("111111111");
+        hotelFacade.create(hotel);
+        Assert.assertEquals(hotelFacade.findAll().size(), 3);
+        hotelFacade.delete(hotel);
+        Assert.assertEquals(hotelFacade.findAll().size(), 2);
+    }
 
     @Test
     public void findByWrongAddress() {

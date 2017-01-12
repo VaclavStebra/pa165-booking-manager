@@ -6,6 +6,9 @@ import cz.muni.fi.pa165.brown.dto.reservation.ReservationDTO;
 import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 
+import cz.muni.fi.pa165.brown.service.TimeService;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -13,14 +16,18 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -43,16 +50,25 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private UserFacade userFacade;
 
+    @Mock
+    private TimeService timeService;
+
     private HotelDTO hotel;
     private RoomDTO room1;
     private RoomDTO room2;
     private ReservationDTO reservation1;
     private ReservationDTO reservation2;
     private SimpleDateFormat sdf;
+    private UserDTO user;
+
+    @BeforeClass
+    public void setupMocks() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @BeforeMethod
     public void createReservations() throws ParseException {
-        UserDTO user = new UserDTO();
+        user = new UserDTO();
         user.setName("user");
         user.setSurname("surname");
         user.setAddress("address");
@@ -129,6 +145,21 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(list.size(), 2);
         Assert.assertTrue(list.contains(reservation1));
         Assert.assertTrue(list.contains(reservation2));
+    }
+
+    @Test
+    public void delete() throws ParseException {
+        ReservationDTO reservation = new ReservationDTO();
+        reservation.setRoom(room1);
+        reservation.setUser(user);
+
+        sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        reservation.setReservedFrom(sdf.parse("24.11.2016 11:00"));
+        reservation.setReservedTo(sdf.parse("25.11.2016 11:00"));
+        reservationFacade.create(reservation);
+        Assert.assertEquals(reservationFacade.findAll().size(), 3);
+        reservationFacade.delete(reservation);
+        Assert.assertEquals(reservationFacade.findAll().size(), 2);
     }
 
     @Test
