@@ -43,7 +43,7 @@ public class RoomFacadeTest extends AbstractTestNGSpringContextTests {
         HotelDTO hotel = createHotelDto(
                 "Hotel-1",
                 "Address-1",
-                "Phone-1"
+                "111111111"
         );
 
         hotelFacade.create(hotel);

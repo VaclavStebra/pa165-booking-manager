@@ -64,7 +64,7 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
         hotel = new HotelDTO();
         hotel.setAddress("address");
         hotel.setName("name");
-        hotel.setPhone("phone");
+        hotel.setPhone("111111111");
         hotelFacade.create(hotel);
 
         room1 = new RoomDTO();

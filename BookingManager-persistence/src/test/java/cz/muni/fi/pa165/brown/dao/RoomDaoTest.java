@@ -35,7 +35,7 @@ public class RoomDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void updateTest() {
-        Hotel h1 = buildHotel("hotel1", "address1", "phone1");
+        Hotel h1 = buildHotel("hotel1", "address1", "111111111");
         hotelDao.create(h1);
 
         Room r1 = buildRoom(10, new BigDecimal("1.0"), h1, "A101");
@@ -50,7 +50,7 @@ public class RoomDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void deleteTest() {
-        Hotel h1 = buildHotel("hotel1", "address1", "phone1");
+        Hotel h1 = buildHotel("hotel1", "address1", "111111111");
         hotelDao.create(h1);
 
         Room r1 = buildRoom(10, new BigDecimal("1.0"), h1, "A101");
@@ -69,7 +69,7 @@ public class RoomDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByIdTest() {
-        Hotel h1 = buildHotel("hotel1", "address1", "phone1");
+        Hotel h1 = buildHotel("hotel1", "address1", "111111111");
         hotelDao.create(h1);
 
         Room r1 = buildRoom(10, new BigDecimal("1.0"), h1, "A101");
@@ -81,7 +81,7 @@ public class RoomDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findAllTest() {
-        Hotel h1 = buildHotel("hotel1", "address1", "phone1");
+        Hotel h1 = buildHotel("hotel1", "address1", "111111111");
         hotelDao.create(h1);
 
         Room r1 = buildRoom(10, new BigDecimal("1.0"), h1, "A101");
@@ -101,9 +101,9 @@ public class RoomDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByHotelTest() {
-        Hotel h1 = buildHotel("hotel1", "address1", "phone1");
-        Hotel h2 = buildHotel("hotel2", "address2", "phone2");
-        Hotel h3 = buildHotel("hotel3", "address3", "phone3");
+        Hotel h1 = buildHotel("hotel1", "address1", "111111111");
+        Hotel h2 = buildHotel("hotel2", "address2", "222222222");
+        Hotel h3 = buildHotel("hotel3", "address3", "333333333");
         hotelDao.create(h1);
         hotelDao.create(h2);
         hotelDao.create(h3);
@@ -127,7 +127,7 @@ public class RoomDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByCapacityTest() {
-        Hotel h1 = buildHotel("hotel1", "address1", "phone1");
+        Hotel h1 = buildHotel("hotel1", "address1", "111111111");
         hotelDao.create(h1);
 
         Room r1 = buildRoom(10, new BigDecimal("1.0"), h1, "A101");

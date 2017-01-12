@@ -77,7 +77,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         User user1 = createUserInstance("User1Name", "User1Surname", "User1Address", "User1Email", "User1Password", true);
         createUser(user1);
 
-        Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "Hotel1Phone");
+        Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "111111111");
         createHotel(hotel1);
 
         Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1, "A123");
@@ -99,7 +99,7 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         User user1 = createUserInstance("User1Name", "User1Surname", "User1Address", "User1Email", "User1Password", true);
         createUser(user1);
 
-        Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "Hotel1Phone");
+        Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "111111111");
         createHotel(hotel1);
 
         Room room1 = createRoomInstance(1, new BigDecimal("1.0"), hotel1, "A123");
@@ -121,8 +121,8 @@ public class ReservationDaoTest extends AbstractTestNGSpringContextTests {
         createUser(user1);
         createUser(user2);
 
-        Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "Hotel1Phone");
-        Hotel hotel2 = createHotelInstance("Hotel2Name", "Hotel2Address", "Hotel2Phone");
+        Hotel hotel1 = createHotelInstance("Hotel1Name", "Hotel1Address", "111111111");
+        Hotel hotel2 = createHotelInstance("Hotel2Name", "Hotel2Address", "222222222");
         createHotel(hotel1);
         createHotel(hotel2);
 
