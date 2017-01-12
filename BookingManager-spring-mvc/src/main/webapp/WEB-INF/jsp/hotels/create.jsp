@@ -20,7 +20,7 @@
         <fmt:message key="hotel.title.create" />
       </h1>
 
-    <form:form method="post" action="${pageContext.request.contextPath}/${endpoint}/create" modelAttribute="hotel" cssClass="form-horizontal">
+    <form:form method="post" action="${pageContext.request.contextPath}/${endpoint}/" modelAttribute="hotel" cssClass="form-horizontal">
 
       <div class="form-group ${name_error?'has-error':''}">
         <form:label path="name" cssClass="col-sm-2 control-label"><fmt:message key="hotel.name"/></form:label>

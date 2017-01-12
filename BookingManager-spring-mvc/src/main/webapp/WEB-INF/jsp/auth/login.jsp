@@ -8,7 +8,7 @@
 
 <my:pagetemplate>
     <jsp:attribute name="body">
-       <form:form method="post" action="${pageContext.request.contextPath}/auth/signin/"
+       <form:form method="post" action="${pageContext.request.contextPath}/auth/"
            modelAttribute="userLogin" cssClass="form-horizontal">
 
        <div class="form-group ${email_error?'has-error':''}">

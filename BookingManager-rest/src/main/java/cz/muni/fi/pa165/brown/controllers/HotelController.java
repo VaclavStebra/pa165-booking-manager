@@ -84,7 +84,7 @@ public class HotelController {
      * @param hotelDTO hotelCreateDTO with required fields for creation
      * @throws ResourceAlreadyExistingException
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final void createHotel(@RequestBody HotelDTO hotelDTO) throws Exception {
 

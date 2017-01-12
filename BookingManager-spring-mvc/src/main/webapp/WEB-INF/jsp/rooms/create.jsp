@@ -20,7 +20,7 @@
         <fmt:message key="room.title.create" />
       </h1>
 
-    <form:form method="post" action="${pageContext.request.contextPath}/${endpoint}/create" modelAttribute="roomNew" cssClass="form-horizontal">
+    <form:form method="post" action="${pageContext.request.contextPath}/${endpoint}/" modelAttribute="roomNew" cssClass="form-horizontal">
 
       <div class="form-group ${roomIdentifier_error?'has-error':''}">
         <form:label path="roomIdentifier" cssClass="col-sm-2 control-label"><fmt:message key="room.roomIdentifier"/></form:label>

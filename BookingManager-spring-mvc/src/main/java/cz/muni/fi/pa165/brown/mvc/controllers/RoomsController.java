@@ -70,7 +70,7 @@ public class RoomsController {
         return "rooms/create";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("roomNew") RoomDTO roomNew, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         if (bindingResult.hasErrors()) {

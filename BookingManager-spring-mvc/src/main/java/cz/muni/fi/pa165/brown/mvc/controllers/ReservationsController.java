@@ -116,7 +116,7 @@ public class ReservationsController {
         return "reservations/create";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("reservationNew") ReservationDTO reservationNew, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         if (bindingResult.hasErrors()) {
