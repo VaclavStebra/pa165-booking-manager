@@ -45,7 +45,7 @@ public class AuthController {
         return "auth/login";
     }
 
-    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public String signIn(@Valid @ModelAttribute("userLogin") UserLoginDTO userLogin, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, HttpServletRequest request) {
 
