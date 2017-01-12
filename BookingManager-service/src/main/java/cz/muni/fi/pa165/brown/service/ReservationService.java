@@ -75,7 +75,23 @@ public interface ReservationService {
      */
     List<Reservation> findReservationsFromLastNDays(int n) throws DataAccessException;
 
+    /**
+     * Returns available rooms for hotel in given time frame
+     *
+     * @param hotel hotel
+     * @param dateFrom start date
+     * @param dateTo end date
+     * @return List of available rooms for hotel in given time frame
+     * @throws DataAccessException when execution fails
+     */
     List<Room> findAvailableRooms(Hotel hotel, Date dateFrom, Date dateTo) throws DataAccessException;
 
+    /**
+     *  Returns all reservation for given user
+     *
+     * @param user user
+     * @return List of reservations for given user
+     * @throws DataAccessException when execution fails
+     */
     List<Reservation> findForUser(User user) throws DataAccessException;
 }

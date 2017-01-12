@@ -45,6 +45,13 @@ public interface UserService {
      */
     void createUser(User u) throws DataAccessException;
 
+    /**
+     * Returns true if login is successful
+     *
+     * @param u user
+     * @param password password
+     * @return whether login was successful
+     */
     boolean login(User u, String password);
 
 }

@@ -168,17 +168,17 @@ public class User implements Serializable {
             return false;
         }
         User user = (User) o;
-        if (email == null) {
-            if (user.email != null) {
+        if (getEmail() == null) {
+            if (user.getEmail() != null) {
                 return false;
             }
         }
-        return email.equals(user.email);
+        return getEmail().equals(user.getEmail());
 
     }
 
     @Override
     public int hashCode() {
-        return 31 + ((email == null) ? 0 : email.hashCode());
+        return 31 + ((getEmail() == null) ? 0 : getEmail().hashCode());
     }
 }

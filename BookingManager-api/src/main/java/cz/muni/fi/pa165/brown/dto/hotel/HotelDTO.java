@@ -76,12 +76,12 @@ public class HotelDTO
             return false;
         }
         HotelDTO other = (HotelDTO) obj;
-        if (address == null) {
-            if (other.address != null) {
+        if (getAddress() == null) {
+            if (other.getAddress() != null) {
                 return false;
             }
         }
-        return address.equals(other.address);
+        return getAddress().equals(other.getAddress());
 
     }
 }

@@ -77,24 +77,24 @@ public class ReservationDTO {
 
         ReservationDTO that = (ReservationDTO) o;
 
-        if (user != null ? !user.equals(that.user) : that.user != null) {
+        if (getUser() != null ? !getUser().equals(that.getUser()) : that.getUser() != null) {
             return false;
         }
-        if (room != null ? !room.equals(that.room) : that.room != null) {
+        if (getRoom() != null ? !getRoom().equals(that.getRoom()) : that.getRoom() != null) {
             return false;
         }
-        if (reservedFrom != null ? !reservedFrom.equals(that.reservedFrom) : that.reservedFrom != null) {
+        if (getReservedFrom() != null ? !getReservedFrom().equals(that.getReservedFrom()) : that.getReservedFrom() != null) {
             return false;
         }
-        return reservedTo != null ? reservedTo.equals(that.reservedTo) : that.reservedTo == null;
+        return getReservedTo() != null ? getReservedTo().equals(that.getReservedTo()) : that.getReservedTo() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = reservedFrom != null ? reservedFrom.hashCode() : 0;
-        result = 31 * result + (reservedTo != null ? reservedTo.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (room != null ? room.hashCode() : 0);
+        int result = getReservedFrom() != null ? getReservedFrom().hashCode() : 0;
+        result = 31 * result + (getReservedTo() != null ? getReservedTo().hashCode() : 0);
+        result = 31 * result + (getUser() != null ? getUser().hashCode() : 0);
+        result = 31 * result + (getRoom() != null ? getRoom().hashCode() : 0);
         return result;
     }
 }

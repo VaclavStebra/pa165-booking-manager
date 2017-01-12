@@ -169,11 +169,11 @@ public class RoomDTO {
     @Override
     public String toString() {
         return "RoomDTO{" +
-                "id=" + id +
-                ", capacity=" + capacity +
-                ", pricePerNightPerPerson=" + pricePerNightPerPerson +
-                ", hotel=" + hotel +
-                ", roomIdentifier='" + roomIdentifier + '\'' +
+                "id=" + getId() +
+                ", capacity=" + getCapacity() +
+                ", pricePerNightPerPerson=" + getPricePerNightPerPerson() +
+                ", hotel=" + getHotel() +
+                ", roomIdentifier='" + getRoomIdentifier() + '\'' +
                 '}';
     }
 }

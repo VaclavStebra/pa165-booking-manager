@@ -79,7 +79,7 @@ public class HotelController {
      * Create a new hotel by POST method curl -X POST -i -H "Content-Type:
      * application/json" --data
      * '{"name":"Hotel","phone":789777654,"address":"adressofhotel"}'
-     * http://localhost:8080/pa165/rest/hotel/create
+     * http://localhost:8080/pa165/rest/hotel
      *
      * @param hotelDTO hotelCreateDTO with required fields for creation
      * @throws ResourceAlreadyExistingException
@@ -92,6 +92,26 @@ public class HotelController {
             hotelFacade.create(hotelDTO);
         } catch (Exception ex) {
             throw new ResourceAlreadyExistingException();
+        }
+    }
+
+    /**
+     * Update hotel by id curl -i -X PUT -i -H "Content-Type:
+     * application/json" --data
+     * '{"name": "Hotel", "phone": 123456, "addres":"addressOfHotel"}'
+     * http://localhost:8080/pa165/rest/hotel/{id}
+     *
+     * @param id identifier for hotel
+     * @throws ResourceNotFoundException
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final HotelDTO updateHotel(@PathVariable("id") long id, @RequestBody HotelDTO hotelDTO) throws Exception {
+        try {
+            hotelDTO.setId(id);
+            hotelFacade.update(hotelDTO);
+            return hotelFacade.findById(id);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
         }
     }
 }

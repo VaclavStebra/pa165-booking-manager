@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  *
  * @author Michal Hagara
@@ -33,6 +35,7 @@ public class Hotel implements Serializable {
     
     @NotNull
     @Column(nullable=false)
+    @Pattern(regexp="\\+?\\d+")
     private String phone;
     
     

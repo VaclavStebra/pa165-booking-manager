@@ -62,16 +62,16 @@ public class ReservationCreateDTO {
 
         ReservationCreateDTO that = (ReservationCreateDTO) o;
 
-        if (reservedFrom != null ? !reservedFrom.equals(that.reservedFrom) : that.reservedFrom != null) {
+        if (getReservedFrom() != null ? !getReservedFrom().equals(that.getReservedFrom()) : that.getReservedFrom() != null) {
             return false;
         }
-        return reservedTo != null ? reservedTo.equals(that.reservedTo) : that.reservedTo == null;
+        return getReservedTo() != null ? getReservedTo().equals(that.getReservedTo()) : that.getReservedTo() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = reservedFrom != null ? reservedFrom.hashCode() : 0;
-        result = 31 * result + (reservedTo != null ? reservedTo.hashCode() : 0);
+        int result = getReservedFrom() != null ? getReservedFrom().hashCode() : 0;
+        result = 31 * result + (getReservedTo() != null ? getReservedTo().hashCode() : 0);
         return result;
     }
 }
