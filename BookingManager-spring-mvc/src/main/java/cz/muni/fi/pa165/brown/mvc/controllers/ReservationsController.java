@@ -70,7 +70,7 @@ public class ReservationsController {
     private DateBinder dateBinder;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String list(Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes, HttpServletRequest request ) {
+    public String list(Model model, HttpServletRequest request ) {
         log.debug("List operation called");
         ReservationIntervalDTO interval = new ReservationIntervalDTO();
         interval.setFrom(new Date());
@@ -214,13 +214,20 @@ public class ReservationsController {
                            @PathVariable long id,
                            Model model,
                            UriComponentsBuilder uriBuilder,
-                           RedirectAttributes redirectAttributes) {
+                           RedirectAttributes redirectAttributes,
+                           HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("reservationId", id);
             return "reservations/edituser";
         }
 
+        UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+
         ReservationDTO reservation = reservationFacade.findById(id);
+        if ( ! reservation.getUser().getId().equals(user.getId())) {
+            redirectAttributes.addFlashAttribute("allert_danger", "Cannot update reservation of another user");
+            return "redirect:" + uriBuilder.path("/reservations").buildAndExpand(id).encode().toUriString();
+        }
         reservation.setReservedFrom(reservationEdit.getFrom());
         reservation.setReservedTo(reservationEdit.getTo());
         reservationFacade.update(reservation);
@@ -233,8 +240,8 @@ public class ReservationsController {
     public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         ReservationDTO res = reservationFacade.findById(id);
         UserDTO loggedUser = (UserDTO) request.getSession().getAttribute("user");
-        if(!loggedUser.isAdmin() && res.getUser().getId() != loggedUser.getId()){
-            return "redirect:" + uriBuilder.path("/").build().toUriString();
+        if( ! res.getUser().getId().equals(loggedUser.getId()) && ! loggedUser.isAdmin()) {
+            return "redirect:" + uriBuilder.path("/reservations/get").buildAndExpand(id).encode().toUriString();
         }
 
         ReservationDTO reservation = reservationFacade.findById(id);

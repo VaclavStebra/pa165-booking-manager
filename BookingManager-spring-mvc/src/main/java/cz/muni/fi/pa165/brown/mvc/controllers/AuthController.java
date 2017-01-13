@@ -55,7 +55,7 @@ public class AuthController {
 
         UserDTO databaseUser = userFacade.findUserByEmail(userLogin.getEmail());
         if (databaseUser == null) {
-            redirectAttributes.addFlashAttribute("alert_warning", "User with email " + userLogin.getEmail() + " does not exist");
+            redirectAttributes.addFlashAttribute("alert_warning", "Login for " + userLogin.getEmail() + " failed");
             return "redirect:" + uriBuilder.path("/auth").build().toUriString();
         }
 

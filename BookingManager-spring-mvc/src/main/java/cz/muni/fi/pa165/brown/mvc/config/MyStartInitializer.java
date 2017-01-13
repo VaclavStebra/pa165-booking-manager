@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.brown.mvc.config;
 
+import cz.muni.fi.pa165.brown.mvc.security.AuthFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -21,8 +22,9 @@ public class MyStartInitializer extends AbstractAnnotationConfigDispatcherServle
     @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        AuthFilter authFilter = new AuthFilter();
         encodingFilter.setEncoding("utf-8");
-        return new Filter[]{encodingFilter};
+        return new Filter[]{authFilter, encodingFilter};
     }
 
     @Override
