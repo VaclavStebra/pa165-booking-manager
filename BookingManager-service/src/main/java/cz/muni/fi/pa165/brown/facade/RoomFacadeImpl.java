@@ -38,6 +38,9 @@ public class RoomFacadeImpl implements RoomFacade {
 
     @Override
     public void create(RoomDTO room) {
+        if (room == null) {
+            throw new IllegalArgumentException("room dto is null");
+        }
         try {
             Room roomEntity = beanMappingService.mapTo(room, Room.class);
             roomService.create(roomEntity);
@@ -49,6 +52,9 @@ public class RoomFacadeImpl implements RoomFacade {
 
     @Override
     public void delete(RoomDTO room) {
+        if (room == null) {
+            throw new IllegalArgumentException("room dto is null");
+        }
         try {
             roomService.delete(beanMappingService.mapTo(room, Room.class));
         } catch (ServiceException e) {
@@ -58,6 +64,9 @@ public class RoomFacadeImpl implements RoomFacade {
 
     @Override
     public RoomDTO update(RoomDTO room) {
+        if (room == null) {
+            throw new IllegalArgumentException("room dto is null");
+        }
         Room roomObject = beanMappingService.mapTo(room, Room.class);
         try {
             roomService.update(roomObject);
@@ -71,6 +80,9 @@ public class RoomFacadeImpl implements RoomFacade {
 
     @Override
     public RoomDTO findById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id is null");
+        }
         try {
             return beanMappingService.mapTo(roomService.findById(id), RoomDTO.class);
         } catch (ServiceException e) {
@@ -81,6 +93,9 @@ public class RoomFacadeImpl implements RoomFacade {
 
     @Override
     public List<RoomDTO> findByHotel(HotelDTO hotel) {
+        if (hotel == null) {
+            throw new IllegalArgumentException("hotel dto is null");
+        }
         try {
             return beanMappingService.mapTo(
                     roomService.findByHotel(beanMappingService.mapTo(hotel, Hotel.class)),
@@ -93,6 +108,9 @@ public class RoomFacadeImpl implements RoomFacade {
 
     @Override
     public List<RoomDTO> findByCapacity(Integer capacity) {
+        if (capacity == null) {
+            throw new IllegalArgumentException("capacity is null");
+        }
         try {
             return beanMappingService.mapTo(roomService.findByCapacity(capacity), RoomDTO.class);
         } catch (ServiceException e) {

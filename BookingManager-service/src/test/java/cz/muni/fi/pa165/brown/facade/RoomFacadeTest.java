@@ -100,6 +100,53 @@ public class RoomFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(roomFacade.findByHotel(savedHotel).size(), 3);
     }
 
+    @Test
+    public void update() throws Exception {
+        room1.setCapacity(879);
+        roomFacade.update(room1);
+        RoomDTO changedRoom = roomFacade.findById(room1.getId());
+        Assert.assertEquals((int) changedRoom.getCapacity(), 879);
+    }
+
+    @Test
+    public void delete() throws Exception {
+        RoomDTO room = createRoomDto(1, new BigDecimal(12), savedHotel, "ads");
+        roomFacade.create(room);
+        Assert.assertEquals(roomFacade.findAll().size(), 4);
+        roomFacade.delete(room);
+        Assert.assertEquals(roomFacade.findAll().size(), 3);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullRoom() {
+        roomFacade.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNullRoom() {
+        roomFacade.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteNullRoom() {
+        roomFacade.delete(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullId() {
+        roomFacade.findById(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullHotel() {
+        roomFacade.findByHotel(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullCapacity() {
+        roomFacade.findByCapacity(null);
+    }
+
     // Helper methods
 
     private RoomDTO createRoomDto(Integer capacity, BigDecimal pricePerNightPerPerson, HotelDTO hotel, String roomIdentifier) {

@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.brown.service.impl;
 import cz.muni.fi.pa165.brown.service.TimeService;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -12,6 +13,6 @@ import java.util.Date;
 public class TimeServiceImpl implements TimeService {
     @Override
     public Date getCurrentTime() {
-        return new Date();
+        return Date.from(ZonedDateTime.now().toInstant());
     }
 }

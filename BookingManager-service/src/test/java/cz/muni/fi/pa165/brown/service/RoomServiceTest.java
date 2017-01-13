@@ -137,6 +137,22 @@ public class RoomServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void update() throws Exception {
+        rooms.get(1).setCapacity(123123);
+        roomService.update(rooms.get(1));
+        Assert.assertEquals((int)roomService.findById(rooms.get(1).getId()).getCapacity(), 123123);
+    }
+
+    @Test
+    public void delete() throws Exception {
+        Room room = rooms.get(2);
+        rooms.remove(2);
+        roomService.delete(rooms.get(0));
+        when(roomDao.findAll()).thenReturn(rooms);
+        Assert.assertEquals(roomService.findAll().size(), ROOM_COUNT - 1);
+        rooms.add(2, room);
+    }
+
     public void create() throws Exception {
         Room room = createRoom(
                 null,

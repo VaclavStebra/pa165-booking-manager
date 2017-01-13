@@ -6,6 +6,9 @@ import cz.muni.fi.pa165.brown.dto.reservation.ReservationDTO;
 import cz.muni.fi.pa165.brown.dto.room.RoomDTO;
 import cz.muni.fi.pa165.brown.dto.user.UserDTO;
 
+import cz.muni.fi.pa165.brown.service.TimeService;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -13,14 +16,18 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -43,16 +50,25 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private UserFacade userFacade;
 
+    @Mock
+    private TimeService timeService;
+
     private HotelDTO hotel;
     private RoomDTO room1;
     private RoomDTO room2;
     private ReservationDTO reservation1;
     private ReservationDTO reservation2;
     private SimpleDateFormat sdf;
+    private UserDTO user;
+
+    @BeforeClass
+    public void setupMocks() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @BeforeMethod
     public void createReservations() throws ParseException {
-        UserDTO user = new UserDTO();
+        user = new UserDTO();
         user.setName("user");
         user.setSurname("surname");
         user.setAddress("address");
@@ -132,6 +148,21 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void delete() throws ParseException {
+        ReservationDTO reservation = new ReservationDTO();
+        reservation.setRoom(room1);
+        reservation.setUser(user);
+
+        sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        reservation.setReservedFrom(sdf.parse("24.11.2016 11:00"));
+        reservation.setReservedTo(sdf.parse("25.11.2016 11:00"));
+        reservationFacade.create(reservation);
+        Assert.assertEquals(reservationFacade.findAll().size(), 3);
+        reservationFacade.delete(reservation);
+        Assert.assertEquals(reservationFacade.findAll().size(), 2);
+    }
+
+    @Test
     public void findReservationsBetweenDates() throws ParseException {
         Date from = sdf.parse("23.11.2016 11:00");
         Date to = sdf.parse("29.11.2016 16:00");
@@ -150,4 +181,59 @@ public class ReservationFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(list.size(), 1);
         Assert.assertEquals(list.get(0), room2);
     }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNull() {
+        reservationFacade.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNull() {
+        reservationFacade.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteNull() {
+        reservationFacade.delete(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullId() {
+        reservationFacade.findById(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findReservationsBetweenDatesStartNull() {
+        reservationFacade.findReservationsBetweenDates(null, Date.from(ZonedDateTime.now().toInstant()));
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findReservationsBetweenDatesEndNull() {
+        reservationFacade.findReservationsBetweenDates(Date.from(ZonedDateTime.now().toInstant()), null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findForNullUser() {
+        reservationFacade.findForUser(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findAvailableRoomsForNullHotel() {
+        Date now = Date.from(ZonedDateTime.now().toInstant());
+        reservationFacade.findAvailableRooms(null, now, now);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findAvailableRoomsForNullStart() {
+        Date now = Date.from(ZonedDateTime.now().toInstant());
+        reservationFacade.findAvailableRooms(hotel, null, now);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findAvailableRoomsForNullEnd() {
+        Date now = Date.from(ZonedDateTime.now().toInstant());
+        reservationFacade.findAvailableRooms(hotel, now, null);
+    }
+
+
 }
