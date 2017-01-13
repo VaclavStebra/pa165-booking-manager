@@ -20,14 +20,14 @@ public interface HotelFacade
      *
      * @param hotel to be created
      */
-    public void create(HotelDTO hotel);
+    void create(HotelDTO hotel);
 
     /*
       * Deletes a hotel
       *
       * @param hotel to be deleted
       */
-    public void delete(HotelDTO hotel);
+    void delete(HotelDTO hotel);
 
 
     /*
@@ -35,7 +35,7 @@ public interface HotelFacade
      *
      * @param hotel to be updated
      */
-    public HotelDTO update(HotelDTO hotel);
+    HotelDTO update(HotelDTO hotel);
 
 
     /**
@@ -44,7 +44,7 @@ public interface HotelFacade
      * @param id - id of a Hotel to find
      * @return Hotel
      */
-    public HotelDTO findById(Long id);
+    HotelDTO findById(Long id);
 
     /**
      * Finds Hotel by id
@@ -52,14 +52,14 @@ public interface HotelFacade
      * @param address - address of a Hotel to find
      * @return Hotel
      */
-    public HotelDTO findByAddress(String address);
+    HotelDTO findByAddress(String address);
 
     /**
      * Finds all hotels in the DB
      *
      * @return Collection of hotels found
      */
-    public List<HotelDTO> findAll();
+    List<HotelDTO> findAll();
 
 
 }
